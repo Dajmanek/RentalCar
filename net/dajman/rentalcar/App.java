@@ -1,11 +1,7 @@
 package net.dajman.rentalcar;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.dajman.rentalcar.basic.Car;
@@ -15,13 +11,11 @@ import net.dajman.rentalcar.ui.HistoryElement;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.data.managers.FileDataManager;
 import net.dajman.rentalcar.data.storage.EntryStorage;
+import net.dajman.rentalcar.ui.helpers.DragHelper;
+import net.dajman.rentalcar.ui.helpers.ResizeHelper;
 import net.dajman.rentalcar.ui.SceneLoader;
-import net.dajman.rentalcar.ui.builder.menu.MainMenuBarBuilder;
 import net.dajman.rentalcar.ui.controller.IController;
 import net.dajman.rentalcar.ui.controller.controllers.MenuBarController;
-import net.dajman.rentalcar.ui.controller.controllers.TestController;
-
-import java.io.IOException;
 import java.util.*;
 
 public class App extends Application {
@@ -31,12 +25,15 @@ public class App extends Application {
     private static Image loadingGif;
     private static Image imageUser;
 
+
     private FileDataManager fileDataManager;
     private EntryStorage<Car> carStorage;
     private EntryStorage<Client> clientStorage;
 
     private Stage stage;
     private NodeType openedGui;
+    private DragHelper dragHelper;
+    private ResizeHelper resizeHelper;
     private List<HistoryElement> history;
     private Map<NodeType, SceneLoader> sceneLoader;
     private Map<NodeType, IController> controllers;
@@ -81,13 +78,19 @@ public class App extends Application {
     public List<EntryStorage<? extends Entry<?>>> getEntryStorages(){
         return Arrays.asList(carStorage, clientStorage);
     }
-
     public Stage getStage() {
         return stage;
     }
 
     public NodeType getOpenedGui() {
         return openedGui;
+    }
+
+    public ResizeHelper getResizeHelper() {
+        return resizeHelper;
+    }
+    public DragHelper getDragHelper() {
+        return dragHelper;
     }
 
     public IController getController(final NodeType nodeType){
@@ -137,6 +140,9 @@ public class App extends Application {
         this.stage.setMinHeight(500.0);
         this.stage.setTitle("RentalCar");
         this.stage.getIcons().add(new Image(App.class.getResourceAsStream("ui/img/icon.png")));
+        this.stage.initStyle(StageStyle.TRANSPARENT);
+        this.resizeHelper = new ResizeHelper(this.stage).register();
+        this.dragHelper = new DragHelper(this.stage);
 
         this.sceneLoader = new HashMap<>();
         this.sceneLoader.put(NodeType.MAIN, new SceneLoader("main_scene"));
@@ -144,12 +150,11 @@ public class App extends Application {
         this.sceneLoader.put(NodeType.CAR_EDIT, new SceneLoader("car_edit_scene"));
         this.sceneLoader.put(NodeType.CLIENT, new SceneLoader("client_scene"));
         this.sceneLoader.put(NodeType.CLIENT_EDIT, new SceneLoader("client_edit_scene"));
-        //this.openGui(NodeType.MAIN);
+        this.openGui(NodeType.MAIN);
 
 
 
-
-        final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/styles/test_resize.fxml"));
+        /*final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/styles/test_resize.fxml"));
 
 
         this.stage.initStyle(StageStyle.TRANSPARENT);
@@ -159,7 +164,7 @@ public class App extends Application {
             e.printStackTrace();
         }
         this.stage.show();
-        TestController.inst.init();
+        TestController.inst.init();*/
 
 
 

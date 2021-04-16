@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import net.dajman.rentalcar.App;
@@ -26,7 +27,10 @@ public class SceneLoader{
         try{
             this.parent = (Parent)fxmlLoader.load();
             if (this.parent instanceof GridPane){
-                ((GridPane)this.parent).getChildren().add(new MainMenuBarBuilder().build());
+                final MenuBar menuBar = new MainMenuBarBuilder().build();
+                App.getInstance().getResizeHelper().addListener(menuBar);
+                App.getInstance().getDragHelper().register(menuBar);
+                ((GridPane)this.parent).getChildren().add(menuBar);
             }
         }catch (IOException e){
             e.printStackTrace();
