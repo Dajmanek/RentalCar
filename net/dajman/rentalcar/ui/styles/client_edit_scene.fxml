@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane prefHeight="500" prefWidth="750" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.dajman.rentalcar.ui.controller.controllers.ClientEditController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="NEVER" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+
+        <GridPane fx:id="mainContainer" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="5.0" prefWidth="30.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="675.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="5.0" prefWidth="30.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="375.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="7.399999999999977" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                    <left>
+                        <Button mnemonicParsing="false" onAction="#onClickBack" text="Powrót" BorderPane.alignment="CENTER" />
+                    </left>
+                    <right>
+                        <HBox spacing="15.0" BorderPane.alignment="CENTER_RIGHT">
+                            <children>
+                                <BorderPane />
+                                <BorderPane>
+                                    <center>
+                                        <Button mnemonicParsing="false" onAction="#onClickSave" text="Zapisz" BorderPane.alignment="CENTER" />
+                                    </center>
+                                </BorderPane>
+                            </children>
+                        </HBox>
+                    </right>
+                </BorderPane>
+                <GridPane styleClass="whiteContainer" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="403.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="190.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="0.0" prefWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                  <VBox>
+                     <children>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Imię:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="firstName" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label minHeight="35.0" prefHeight="35.0" text="Nazwisko:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="lastName" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Nr telefonu:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="phoneNumber" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Kod pocztowy:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="postCode" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Miasto:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="city" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Ulica:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="street" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Nr budynku" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="buildingNumber" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="5.0">
+                           <children>
+                              <Label prefHeight="35.0" text="Nr mieszkania:" textFill="#535353">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="flatNumber" prefHeight="20.0">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>
