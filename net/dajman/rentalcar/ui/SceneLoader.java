@@ -21,8 +21,8 @@ public class SceneLoader{
     private Parent parent;
 
     public SceneLoader(final String styleFileName){
-        this.path = "ui/styles/" + styleFileName + ".fxml";
-        this.css = App.class.getResource("ui/styles/style.css").toExternalForm();
+        this.path = "ui/fxml/" + styleFileName + ".fxml";
+        this.css = App.class.getResource("ui/css/style.css").toExternalForm();
         final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(this.path));
         try{
             this.parent = (Parent)fxmlLoader.load();

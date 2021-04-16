@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="500" prefWidth="750" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.dajman.rentalcar.ui.controller.controllers.ClientController">
+<GridPane prefHeight="500" prefWidth="750" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.dajman.rentalcar.ui.controller.controllers.ClientController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
     </columnConstraints>
@@ -27,7 +27,7 @@
     </rowConstraints>
     <children>
 
-        <GridPane fx:id="mainContainer" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" GridPane.rowIndex="1">
+        <GridPane fx:id="mainContainer" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="5.0" prefWidth="30.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="675.0" />
@@ -233,7 +233,7 @@
                                                 <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <BorderPane maxWidth="1.7976931348623157E308" styleClass="underline" stylesheets="@style.css">
+                                                <BorderPane maxWidth="1.7976931348623157E308" styleClass="underline" stylesheets="@../css/style.css">
                                                    <right>
                                                       <Button mnemonicParsing="false" text="Zwrot" BorderPane.alignment="CENTER">
                                                          <BorderPane.margin>
@@ -332,7 +332,7 @@
                                                 <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <BorderPane maxWidth="1.7976931348623157E308" prefWidth="200.0" styleClass="tab-border-pane" stylesheets="@style.css">
+                                                <BorderPane maxWidth="1.7976931348623157E308" prefWidth="200.0" styleClass="tab-border-pane" stylesheets="@../css/style.css">
                                                    <right>
                                                       <Button mnemonicParsing="false" text="Wypożycz" BorderPane.alignment="CENTER">
                                                          <BorderPane.margin>
