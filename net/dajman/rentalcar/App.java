@@ -1,6 +1,9 @@
 package net.dajman.rentalcar;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -11,11 +14,14 @@ import net.dajman.rentalcar.ui.HistoryElement;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.data.managers.FileDataManager;
 import net.dajman.rentalcar.data.storage.EntryStorage;
+import net.dajman.rentalcar.ui.controller.controllers.TestController;
 import net.dajman.rentalcar.ui.helpers.DragHelper;
 import net.dajman.rentalcar.ui.helpers.ResizeHelper;
 import net.dajman.rentalcar.ui.SceneLoader;
 import net.dajman.rentalcar.ui.controller.IController;
 import net.dajman.rentalcar.ui.controller.controllers.MenuBarController;
+
+import java.io.IOException;
 import java.util.*;
 
 public class App extends Application {
@@ -150,11 +156,11 @@ public class App extends Application {
         this.sceneLoader.put(NodeType.CAR_EDIT, new SceneLoader("car_edit_scene"));
         this.sceneLoader.put(NodeType.CLIENT, new SceneLoader("client_scene"));
         this.sceneLoader.put(NodeType.CLIENT_EDIT, new SceneLoader("client_edit_scene"));
-        this.openGui(NodeType.MAIN);
+        //this.openGui(NodeType.MAIN);
 
 
 
-        /*final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/styles/test_resize.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/fxml/test_resize.fxml"));
 
 
         this.stage.initStyle(StageStyle.TRANSPARENT);
@@ -164,7 +170,7 @@ public class App extends Application {
             e.printStackTrace();
         }
         this.stage.show();
-        TestController.inst.init();*/
+        TestController.inst.init();
 
 
 

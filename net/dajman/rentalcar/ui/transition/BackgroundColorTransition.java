@@ -11,16 +11,12 @@ import java.util.List;
 public class BackgroundColorTransition extends Transition {
 
 
-    private final double rFrom, gFrom, bFrom, rDiff, gDiff, bDiff;
+    private final Color oldColor, newColor;
     private final List<Node> nodes;
 
-    public BackgroundColorTransition(final Color colorFrom, final Color colorTo, final Duration duration, final Node... nodes){
-        this.rFrom = colorFrom.getRed();
-        this.gFrom = colorFrom.getGreen();
-        this.bFrom = colorFrom.getBlue();
-        this.rDiff = colorTo.getRed() - this.rFrom;
-        this.gDiff = colorTo.getGreen() - this.gFrom;
-        this.bDiff = colorTo.getBlue() - this.bFrom;
+    public BackgroundColorTransition(final Color oldColor, final Color newColor, final Duration duration, final Node... nodes){
+        this.oldColor = oldColor;
+        this.newColor = newColor;
 
         this.nodes = Arrays.asList(nodes);
         this.setCycleDuration(duration);
@@ -29,7 +25,11 @@ public class BackgroundColorTransition extends Transition {
 
     @Override
     protected void interpolate(double v) {
-        final String style = "-fx-background-color: rgb(" + ((rFrom + rDiff * v) * 255) + ", " + ((gFrom + gDiff * v) * 255) + ", " + ((bFrom + bDiff * v) * 255) + ")";
+        final double red = (oldColor.getRed() + (newColor.getRed() - oldColor.getRed()) * v) * 255;
+        final double green = (oldColor.getGreen() + (newColor.getGreen() - oldColor.getGreen()) * v) * 255;
+        final double blue = (oldColor.getBlue() + (newColor.getBlue() - oldColor.getBlue()) * v) * 255;
+        final double opacity = oldColor.getOpacity() + (newColor.getOpacity() - oldColor.getOpacity()) * v;
+        final String style = "-fx-background-color: rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
         this.nodes.forEach(node -> node.setStyle(style));
     }
 }

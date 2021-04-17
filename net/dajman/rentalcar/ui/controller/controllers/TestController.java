@@ -1,13 +1,18 @@
 package net.dajman.rentalcar.ui.controller.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.controller.Controller;
+import net.dajman.rentalcar.ui.transition.ImageTransition;
 
 public class TestController extends Controller {
 
@@ -18,26 +23,22 @@ public class TestController extends Controller {
         inst = this;
     }
 
+
     @FXML
-    public AnchorPane topBorder;
+    private ImageView imageView1;
     @FXML
-    public AnchorPane rightTopBorder;
+    private ImageView imageView2;
     @FXML
-    public AnchorPane rightBorder;
-    @FXML
-    public AnchorPane rightBottomBorder;
-    @FXML
-    public AnchorPane bottomBorder;
-    @FXML
-    public AnchorPane leftBottomBorder;
-    @FXML
-    public AnchorPane leftBorder;
-    @FXML
-    public AnchorPane leftTopBorder;
+    private ImageView imageView3;
+
+    private Image btn_exit;
+    private Image btn_exit_t;
+    private Image btn_restore;
+    private Image btn_restore_t;
+    private Image btn_minimize;
+    private Image btn_minimize_t;
 
 
-    private double endX;
-    private double endY;
 
 
     @Override
@@ -47,75 +48,29 @@ public class TestController extends Controller {
 
     @Override
     protected void firstInitialize() {
-        final Stage stage = App.getInstance().getStage();
-        stage.addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+        btn_exit = new Image(App.class.getResourceAsStream("ui/img/btn_close.png"));
+        btn_exit_t = new Image(App.class.getResourceAsStream("ui/img/btn_close_t.png"));
+        btn_restore = new Image(App.class.getResourceAsStream("ui/img/btn_restore.png"));
+        btn_restore_t = new Image(App.class.getResourceAsStream("ui/img/btn_restore_t.png"));
+        btn_minimize = new Image(App.class.getResourceAsStream("ui/img/btn_minimize.png"));
+        btn_minimize_t = new Image(App.class.getResourceAsStream("ui/img/btn_minimize_t.png"));
 
-        });
-        leftBorder.setCursor(Cursor.W_RESIZE);
-        topBorder.setCursor(Cursor.N_RESIZE);
-        rightBorder.setCursor(Cursor.W_RESIZE);
-        bottomBorder.setCursor(Cursor.S_RESIZE);
-        rightTopBorder.setCursor(Cursor.NE_RESIZE);
-        rightBottomBorder.setCursor(Cursor.SE_RESIZE);
-        leftBottomBorder.setCursor(Cursor.SW_RESIZE);
-        leftTopBorder.setCursor(Cursor.SE_RESIZE);
+        imageView1.setImage(btn_minimize);
+        imageView2.setImage(btn_restore);
+        imageView3.setImage(btn_exit);
 
-        final double minWidth = stage.getMinWidth();
-        final double minHeight = stage.getMinHeight();
+        imageView1.setOnMouseEntered(mouseEvent -> new ImageTransition(imageView1, btn_minimize, btn_minimize_t, Duration.millis(200)).playFromStart());
+        imageView2.setOnMouseEntered(mouseEvent -> new ImageTransition(imageView2, btn_restore, btn_restore_t, Duration.millis(200)).playFromStart());
+        imageView3.setOnMouseEntered(mouseEvent -> new ImageTransition(imageView3, btn_exit, btn_exit_t, Duration.millis(200)).playFromStart());
 
-        // RIGHT
-        rightBorder.setOnMouseDragged(mouseEvent -> stage.setWidth(Math.max(mouseEvent.getScreenX() - stage.getX(), minWidth)));
-        // BOTTOM
-        bottomBorder.setOnMouseDragged(mouseEvent -> stage.setHeight(Math.max(mouseEvent.getScreenY() - stage.getY(), minHeight)));
+        imageView1.setOnMouseExited(mouseEvent -> new ImageTransition(imageView1, btn_minimize_t, btn_minimize, Duration.millis(200)).playFromStart());
+        imageView2.setOnMouseExited(mouseEvent -> new ImageTransition(imageView2, btn_restore_t, btn_restore, Duration.millis(200)).playFromStart());
+        imageView3.setOnMouseExited(mouseEvent -> new ImageTransition(imageView3, btn_exit_t, btn_exit, Duration.millis(200)).playFromStart());
 
-        // LEFT
-        leftBorder.setOnMousePressed(mouseEvent -> {
-            this.endX = stage.getWidth() + stage.getX();
-        });
-        leftBorder.setOnMouseDragged(mouseEvent -> {
-            final double width = this.endX - mouseEvent.getScreenX();
-            if (width < minWidth){
-                return;
-            }
-            stage.setWidth(width);
-            stage.setX(mouseEvent.getScreenX());
-        });
+    }
 
-        // TOP
-        topBorder.setOnMousePressed(mouseEvent -> {
-            this.endY = stage.getHeight() + stage.getY();
-        });
-        topBorder.setOnMouseDragged(mouseEvent -> {
-            final double height = this.endY - mouseEvent.getScreenY();
-            if (height < minHeight){
-                return;
-            }
-            stage.setHeight(height);
-            stage.setY(mouseEvent.getScreenY());
-        });
-
-
-        // CORNER_RIGHT_BOTTOM
-        rightBottomBorder.setOnMouseDragged(mouseEvent -> {
-            stage.setWidth(Math.max(mouseEvent.getScreenX() - stage.getX(), minWidth));
-            stage.setHeight(Math.max(mouseEvent.getScreenY() - stage.getY(), minHeight));
-        });
-
-
-
-        // CORNER_RIGHT_TOP
-        rightTopBorder.setOnMousePressed(mouseEvent -> {
-            this.endY = stage.getHeight() + stage.getY();
-        });
-        rightTopBorder.setOnMouseDragged(mouseEvent -> {
-            stage.setWidth(Math.max(mouseEvent.getScreenX() - stage.getX(), minWidth));
-            final double height = this.endY - mouseEvent.getScreenY();
-            if (height < minHeight){
-                return;
-            }
-            stage.setHeight(height);
-            stage.setY(mouseEvent.getScreenY());
-        });
+    @FXML
+    public void onClick(final ActionEvent event){
 
     }
 }
