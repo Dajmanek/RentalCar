@@ -1,4 +1,4 @@
-package net.dajman.rentalcar.ui;
+package net.dajman.rentalcar.ui.utils;
 
 import javafx.scene.paint.Color;
 

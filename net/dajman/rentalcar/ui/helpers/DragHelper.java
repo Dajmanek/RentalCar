@@ -2,6 +2,7 @@ package net.dajman.rentalcar.ui.helpers;
 
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class DragHelper {
@@ -11,8 +12,11 @@ public class DragHelper {
     private double x;
     private double y;
 
-    public DragHelper(final Stage stage){
+    public DragHelper(final Stage stage, final Node... nodes){
         this.stage = stage;
+        for (Node node : nodes) {
+            this.register(node);
+        }
     }
 
     public void register(){
@@ -31,11 +35,42 @@ public class DragHelper {
     }
 
     private void mouseDragged(final MouseEvent mouseEvent){
-        if (this.stage.getScene().getCursor().toString().contains("RESIZE")){
+        if (this.stage.getScene().getCursor() != null && this.stage.getScene().getCursor().toString().contains("RESIZE")){
             return;
         }
-        this.stage.setX(mouseEvent.getScreenX() + this.x);
-        this.stage.setY(mouseEvent.getScreenY() + this.y);
+        final double x = mouseEvent.getScreenX() + this.x;
+        final double y = mouseEvent.getScreenY() + this.y;
+        if (this.containsXOnScreens(x)){
+            this.stage.setX(x);
+        }
+        if (this.containsYOnScreens(y)){
+            this.stage.setY(y);
+        }
     }
+
+    private boolean containsXOnScreens(final double x){
+        for (Screen screen : Screen.getScreens())
+            if (screen.getBounds().getMinX() <= x && screen.getBounds().getMaxX() >= x)
+                return true;
+        return false;
+    }
+
+    private boolean containsYOnScreens(final double y){
+        for (Screen screen : Screen.getScreens())
+            if (screen.getBounds().getMinY() <= y && screen.getBounds().getMaxY() >= y)
+                return true;
+        return false;
+    }
+
+    private boolean containsOnScreens(final double x, final double y){
+        for (Screen screen : Screen.getScreens())
+            if (screen.getBounds().contains(x ,y))
+                return true;
+        return false;
+    }
+
+
+
+
 
 }

@@ -16,9 +16,10 @@ import javafx.util.Duration;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.basic.Car;
 import net.dajman.rentalcar.ui.NodeType;
-import net.dajman.rentalcar.ui.Colors;
+import net.dajman.rentalcar.ui.utils.Colors;
 import net.dajman.rentalcar.ui.controller.controllers.ClientController;
 import net.dajman.rentalcar.ui.transition.BackgroundColorTransition;
+import net.dajman.rentalcar.ui.utils.Images;
 import net.dajman.rentalcar.utils.TimeUtil;
 
 import java.util.Optional;
@@ -47,13 +48,14 @@ public class CarListBuilder extends EntryListBuilder<Car> {
 
     private Node buildMain(){
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/styles/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.class.getResource("ui/css/style.css").toExternalForm());
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);
         column.setHgrow(Priority.SOMETIMES);
         gridPane.getColumnConstraints().addAll(column);
         gridPane.setPrefHeight(88 * this.object.size());
+        gridPane.setMaxHeight(Double.MAX_VALUE);
 
 
         int index = 0;
@@ -88,7 +90,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             final BorderPane imageBorderPane = new BorderPane();
             imageBorderPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
             hBox.getChildren().add(imageBorderPane);
-            final Image image = Optional.ofNullable(car.getImage()).orElse(App.getImageEmpty());
+            final Image image = Optional.ofNullable(car.getImage()).orElse(Images.imageEmpty);
             final ImageView imageView = new ImageView(image);
             imageView.setFitHeight(75);
             imageView.setPreserveRatio(true);
@@ -143,15 +145,14 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             labelPriceValue.setPrefHeight(20);
             labelPriceValue.setFont(Font.font("System", FontWeight.NORMAL, 13));
             hBoxPrice.getChildren().addAll(labelPrice, labelPriceValue);
-
-
         }
+
         return gridPane;
     }
 
     private Node buildClientRented(){
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/styles/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.class.getResource("ui/css/style.css").toExternalForm());
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);
@@ -182,7 +183,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             final BorderPane imageBorderPane = new BorderPane();
             hBox.getChildren().add(imageBorderPane);
             imageBorderPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
-            final ImageView imageView = new ImageView(Optional.ofNullable(car.getImage()).orElse(App.getImageEmpty()));
+            final ImageView imageView = new ImageView(Optional.ofNullable(car.getImage()).orElse(Images.imageEmpty));
             imageView.setFitWidth(45);
             imageView.setPreserveRatio(true);
             BorderPane.setAlignment(imageBorderPane, Pos.CENTER);
@@ -235,12 +236,13 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             borderPane.setRight(button);
 
         }
+
         return gridPane;
     }
 
     private Node buildClientAvailable(){
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/styles/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.class.getResource("ui/css/style.css").toExternalForm());
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);
@@ -271,7 +273,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             final BorderPane imageBorderPane = new BorderPane();
             hBox.getChildren().add(imageBorderPane);
             imageBorderPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
-            final ImageView imageView = new ImageView(Optional.ofNullable(car.getImage()).orElse(App.getImageEmpty()));
+            final ImageView imageView = new ImageView(Optional.ofNullable(car.getImage()).orElse(Images.imageEmpty));
             imageView.setFitWidth(45);
             imageView.setPreserveRatio(true);
             BorderPane.setAlignment(imageBorderPane, Pos.CENTER);

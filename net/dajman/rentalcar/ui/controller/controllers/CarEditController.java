@@ -14,6 +14,7 @@ import net.dajman.rentalcar.basic.Car;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.builder.alert.AlertBuilder;
 import net.dajman.rentalcar.ui.controller.Controller;
+import net.dajman.rentalcar.ui.utils.Images;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -63,7 +64,7 @@ public class CarEditController extends Controller {
         this.imageBytes = null;
         if (objects.length != 1){
             this.car = null;
-            this.imageView.setImage(App.getImageEmpty());
+            this.imageView.setImage(Images.imageEmpty);
             this.brandField.setText("");
             this.modelField.setText("");
             this.priceField.setText("");
@@ -73,7 +74,7 @@ public class CarEditController extends Controller {
         this.brandField.setText(car.getBrand());
         this.modelField.setText(car.getModel());
         this.priceField.setText(car.getPrice() + "");
-        this.imageView.setImage(car.getImage() != null ? car.getImage() : App.getImageEmpty());
+        this.imageView.setImage(car.getImage() != null ? car.getImage() : Images.imageEmpty);
     }
 
 

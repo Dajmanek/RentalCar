@@ -3,10 +3,10 @@ package net.dajman.rentalcar.ui;
 public enum NodeType {
 
     MAIN,
+    LISTS,
     CAR,
     CAR_EDIT,
     CLIENT,
-    CLIENT_EDIT,
-    MENU_BAR;
+    CLIENT_EDIT;
 
 }

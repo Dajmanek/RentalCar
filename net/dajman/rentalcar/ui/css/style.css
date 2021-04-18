@@ -1,3 +1,12 @@
+#mainContainer{
+
+    -fx-border-color: #eaeaea;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+
+
 .tab-pane *.tab-header-area *.tab-header-background{
     -fx-background-color: #f5f5f5;
     -fx-border-color: #eaeaea;
@@ -9,6 +18,20 @@ TabPane{
     -fx-border-color: #eaeaea;
     -fx-border-width: 1;
     -fx-border-style: solid;
+}
+
+
+VBox, GridPane{
+    -fx-background-color: #ffffff;
+
+}
+
+.menuBar, MenuBar{
+    -fx-background-color: #f5f4f4;
+    -fx-border-color: #eaeaea;
+    -fx-border-width: 1;
+    -fx-border-style: hidden hidden solid hidden;
+
 }
 
 
@@ -28,7 +51,7 @@ Tab GridPane BorderPane{
 }
 
 ScrollPane GridPane, ScrollPane BorderPane{
-    -fx-background-color: #f5f5f5;
+    -fx-background-color: #dedede;
 }
 ScrollPane BorderPane:hover, ScrollPane BorderPane:hover GridPane{
 

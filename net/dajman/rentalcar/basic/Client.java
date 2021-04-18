@@ -18,6 +18,7 @@ public class Client extends Entry<Client>{
     private List<Car> rentedCars;
 
     public Client(){
+        this.rentedCars = new ArrayList<>();
     }
 
     public Client(final String text) throws DeserializationException{

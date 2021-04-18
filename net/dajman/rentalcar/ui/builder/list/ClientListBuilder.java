@@ -14,9 +14,10 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.basic.Client;
-import net.dajman.rentalcar.ui.Colors;
+import net.dajman.rentalcar.ui.utils.Colors;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.transition.BackgroundColorTransition;
+import net.dajman.rentalcar.ui.utils.Images;
 
 import java.util.Set;
 
@@ -35,7 +36,7 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             return null;
         }
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/styles/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.class.getResource("ui/css/style.css").toExternalForm());
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);
@@ -77,7 +78,7 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             hBox.getChildren().add(imageBorderPane);
             imageBorderPane.setStyle("-fx-background-color: rgba(0,0,0,0)");
 
-            final ImageView imageView = new ImageView(App.getImageUser());
+            final ImageView imageView = new ImageView(Images.imageUser);
             imageView.setFitHeight(45);
             imageView.setFitWidth(45);
             BorderPane.setAlignment(imageView, Pos.CENTER);

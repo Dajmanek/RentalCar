@@ -15,6 +15,7 @@ import net.dajman.rentalcar.basic.Client;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.builder.list.CarListBuilder;
 import net.dajman.rentalcar.ui.controller.Controller;
+import net.dajman.rentalcar.ui.utils.Images;
 
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -178,7 +179,7 @@ public class ClientController extends Controller {
     }
 
     private void showLoadingGif(){
-        this.loadingGif.setImage(App.getLoadingGif());
+        this.loadingGif.setImage(Images.loadingGif);
     }
 
     private void hideLoadingGif(){

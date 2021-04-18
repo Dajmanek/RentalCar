@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane id="mainContainer" prefHeight="500" prefWidth="750" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.dajman.rentalcar.ui.controller.controllers.MainController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <GridPane maxHeight="30.0" prefHeight="30.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="10.0" prefWidth="40.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="menuBar">
+               <center>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../img/icon.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+                <MenuBar maxHeight="35.0" prefHeight="0.0" prefWidth="298.0" styleClass="menuBarRight" GridPane.columnIndex="1">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Plik">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#onClickOpen" text="Otwórz" />
+                                <MenuItem mnemonicParsing="false" onAction="#onClickSave" text="Zapisz" />
+                                <MenuItem mnemonicParsing="false" onAction="#onClickSaveAs" text="Zapisz jako..." />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Dodaj">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#onClickAddCar" text="Dodaj samochód" />
+                                <MenuItem mnemonicParsing="false" onAction="#onClickAddClient" text="Dodaj klienta" />
+                            </items>
+                        </Menu>
+                    </menus>
+                    <padding>
+                        <Insets top="2.0" />
+                    </padding>
+                </MenuBar>
+                <BorderPane maxHeight="35.0" prefHeight="35.0" prefWidth="200.0" styleClass="menuBar" GridPane.columnIndex="2">
+                    <right>
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER_RIGHT">
+                            <children>
+                                <BorderPane>
+                                    <center>
+                                        <ImageView fx:id="imageMinimize" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#onClickMinimize" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/btn_minimize.png" />
+                                            </image>
+                                            <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                            </cursor>
+                                        </ImageView>
+                                    </center>
+                                </BorderPane>
+                                <BorderPane>
+                                    <center>
+                                        <ImageView fx:id="imageRestore" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#onClickRestore" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/btn_restore.png" />
+                                            </image>
+                                            <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                            </cursor>
+                                        </ImageView>
+                                    </center>
+                                </BorderPane>
+                                <BorderPane>
+                                    <center>
+                                        <ImageView fx:id="imageClose" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#onClickClose" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/btn_close.png" />
+                                            </image>
+                                            <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                            </cursor>
+                                        </ImageView>
+                                    </center>
+                                </BorderPane>
+                            </children>
+                            <padding>
+                                <Insets right="5.0" />
+                            </padding>
+                        </HBox>
+                    </right>
+                </BorderPane>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>

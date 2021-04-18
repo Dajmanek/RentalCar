@@ -11,6 +11,7 @@ import net.dajman.rentalcar.basic.Car;
 import net.dajman.rentalcar.basic.Client;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.controller.Controller;
+import net.dajman.rentalcar.ui.utils.Images;
 import net.dajman.rentalcar.utils.TimeUtil;
 
 
@@ -69,7 +70,7 @@ public class CarController extends Controller {
         this.brandLabel.setText(car.getBrand());
         this.modelLabel.setText(car.getModel());
         this.priceLabel.setText(car.getPrice() + " zl/godz.");
-        this.imageView.setImage(car.getImage() == null ? App.getImageEmpty() : car.getImage());
+        this.imageView.setImage(car.getImage() == null ? Images.imageEmpty : car.getImage());
         if (car.isRented()){
             final Client client = car.getClient();
             this.statusLabel.setText("wypożyczony");
