@@ -36,7 +36,7 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             return null;
         }
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/css/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.class.getResource("ui/resources/css/style.css").toExternalForm());
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);

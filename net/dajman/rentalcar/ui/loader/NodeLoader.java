@@ -13,8 +13,8 @@ public class NodeLoader {
 
 
     public NodeLoader(final String styleFileName){
-        this.css = App.class.getResource("ui/css/style.css").toExternalForm();
-        final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/fxml/" + styleFileName + ".fxml"));
+        this.css = App.class.getResource("ui/resources/css/style.css").toExternalForm();
+        final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/resources/fxml/" + styleFileName + ".fxml"));
         try{
             this.parent = (Parent)fxmlLoader.load();
             this.parent.getStylesheets().add(css);

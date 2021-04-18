@@ -6,6 +6,7 @@ import net.dajman.rentalcar.ui.helpers.DragHelper;
 
 public class MainNodeLoader extends NodeLoader{
 
+
     public MainNodeLoader(String styleFileName) {
         super(styleFileName);
     }

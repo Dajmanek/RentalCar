@@ -115,7 +115,7 @@ public class App extends Application {
         this.stage.setMinWidth(750.0);
         this.stage.setMinHeight(500.0);
         this.stage.setTitle("RentalCar");
-        this.stage.getIcons().add(new Image(App.class.getResourceAsStream("ui/img/icon.png")));
+        this.stage.getIcons().add(new Image(App.class.getResourceAsStream("ui/resources/img/icon.png")));
         this.stage.initStyle(StageStyle.TRANSPARENT);
         this.resizeHelper = new ResizeHelper(this.stage).register();
         this.dragHelper = new DragHelper(this.stage);
@@ -137,7 +137,7 @@ public class App extends Application {
 
 
 
-        /*final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/fxml/test_resize.fxml"));
+        /*final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/resources/fxml/test_resize.fxml"));
         dragHelper.register();
 
         this.stage.initStyle(StageStyle.TRANSPARENT);

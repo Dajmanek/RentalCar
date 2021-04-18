@@ -2,6 +2,8 @@ package net.dajman.rentalcar.ui.transition;
 
 import javafx.animation.Transition;
 import javafx.scene.Node;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
