@@ -103,8 +103,14 @@ public class ClientController extends Controller {
 
     @FXML
     public void onClickDelete(final ActionEvent event){
-        App.getInstance().getClientStorage().remove(this.client);
-        App.getInstance().openGui(NodeType.MAIN);
+        if (this.client != null){
+            this.client.getRentedCars().forEach(car -> {
+                car.setClient(null);
+                car.setRentalDate(-1);
+            });
+            App.getInstance().getClientStorage().remove(this.client);
+        }
+        this.onClickBack(null);
     }
 
 

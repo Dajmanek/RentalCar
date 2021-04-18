@@ -1,9 +1,8 @@
 package net.dajman.rentalcar.ui.transition;
 
 import javafx.animation.Transition;
-import javafx.scene.Node;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -14,12 +13,11 @@ public class BackgroundColorTransition extends Transition {
 
 
     private final Color oldColor, newColor;
-    private final List<Node> nodes;
+    private final List<Pane> nodes;
 
-    public BackgroundColorTransition(final Color oldColor, final Color newColor, final Duration duration, final Node... nodes){
+    public BackgroundColorTransition(final Color oldColor, final Color newColor, final Duration duration, final Pane... nodes){
         this.oldColor = oldColor;
         this.newColor = newColor;
-
         this.nodes = Arrays.asList(nodes);
         this.setCycleDuration(duration);
     }
@@ -27,11 +25,10 @@ public class BackgroundColorTransition extends Transition {
 
     @Override
     protected void interpolate(double v) {
-        final double red = (oldColor.getRed() + (newColor.getRed() - oldColor.getRed()) * v) * 255;
-        final double green = (oldColor.getGreen() + (newColor.getGreen() - oldColor.getGreen()) * v) * 255;
-        final double blue = (oldColor.getBlue() + (newColor.getBlue() - oldColor.getBlue()) * v) * 255;
+        final double red = oldColor.getRed() + (newColor.getRed() - oldColor.getRed()) * v;
+        final double green = oldColor.getGreen() + (newColor.getGreen() - oldColor.getGreen()) * v;
+        final double blue = oldColor.getBlue() + (newColor.getBlue() - oldColor.getBlue()) * v;
         final double opacity = oldColor.getOpacity() + (newColor.getOpacity() - oldColor.getOpacity()) * v;
-        final String style = "-fx-background-color: rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-        this.nodes.forEach(node -> node.setStyle(style));
+        this.nodes.forEach(node -> node.setBackground(new Background(new BackgroundFill(new Color(red, green, blue, opacity), CornerRadii.EMPTY, Insets.EMPTY))));
     }
 }

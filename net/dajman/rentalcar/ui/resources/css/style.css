@@ -30,17 +30,10 @@ VBox, GridPane, ScrollPane{
     -fx-border-style: hidden hidden solid hidden;
 }
 
-
-
 .underline{
     -fx-border-color: #d6d6d6;
     -fx-border-width: 1;
     -fx-border-style: hidden hidden solid hidden;
-}
-
-
-ScrollPane BorderPane:hover, ScrollPane BorderPane:hover GridPane{
-
 }
 
 
