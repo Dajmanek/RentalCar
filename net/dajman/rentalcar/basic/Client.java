@@ -26,7 +26,7 @@ public class Client extends Entry<Client>{
             throw new DeserializationException( "Text is empty");
         }
         final String[] splited = text.split(",");
-        if (splited.length < 8) {
+        if (splited.length < 10) {
             throw new DeserializationException("Text is incomplete");
         }
         try{

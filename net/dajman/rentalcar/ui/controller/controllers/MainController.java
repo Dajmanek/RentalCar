@@ -4,20 +4,16 @@ import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.data.managers.FileDataManager;
 import net.dajman.rentalcar.data.storage.EntryStorage;
 import net.dajman.rentalcar.ui.NodeType;
-import net.dajman.rentalcar.ui.builder.alert.AlertBuilder;
-import net.dajman.rentalcar.ui.builder.alert.ProgressAlertBuilder;
+import net.dajman.rentalcar.ui.alert.Alert;
+import net.dajman.rentalcar.ui.alert.ProgressAlert;
 import net.dajman.rentalcar.ui.controller.Controller;
 import net.dajman.rentalcar.ui.transition.ImageTransition;
 import net.dajman.rentalcar.ui.utils.Images;
@@ -30,8 +26,6 @@ public class MainController extends Controller {
 
 
     private Task<Boolean> fileTask;
-
-    private double width, height, x, y;
 
     @FXML
     private ImageView imageClose;
@@ -73,13 +67,11 @@ public class MainController extends Controller {
             return;
         }
         if (!file.getName().endsWith(FileDataManager.FILE_EXTENSION)){
-            new AlertBuilder(Alert.AlertType.ERROR, "Plik", "Nieprawidłowe rozszerzenie pliku.").buildAndShow();
+            new Alert("Nieprawidłowe rozszerzenie pliku.").show();
             return;
         }
         App.getInstance().setFileDataManager(new FileDataManager(file));
-        final ProgressIndicator progressBar = new ProgressBar();
-        final Alert alert = new ProgressAlertBuilder(Alert.AlertType.INFORMATION, "Plik", "Wczytuję...", progressBar).buildAndShow();
-        alert.show();
+        final ProgressAlert progressAlert = new ProgressAlert("Wczytuję...").show();
         this.fileTask = new Task<>() {
             @Override
             protected Boolean call(){
@@ -88,19 +80,19 @@ public class MainController extends Controller {
                 return App.getInstance().getFileDataManager().load(progress);
             }
         };
-        progressBar.progressProperty().bind(fileTask.progressProperty());
+        progressAlert.bind(this.fileTask.progressProperty());
 
         fileTask.setOnSucceeded(workerStateEvent -> {
             try{
-                ProgressAlertBuilder.endLoading(alert, fileTask.get() ? "Wczytywanie zakończone." : "Wystąpił błąd");
+                progressAlert.endLoading(fileTask.get() ? "Wczytywanie zakończone." : "Wystąpił błąd.");
             }catch (InterruptedException | ExecutionException e){
                 e.printStackTrace();
-                ProgressAlertBuilder.endLoading(alert, "Wystąpił błąd.");
+                progressAlert.endLoading("Wystąpił błąd.");
             }
             if (!App.getInstance().openGui(NodeType.LISTS)) ((ListsController)App.getInstance().getController(NodeType.LISTS)).onClickSearch(null);
         });
         fileTask.setOnFailed(workerStateEvent -> {
-            ProgressAlertBuilder.setContentText(alert, "Wystąpił błąd.");
+            progressAlert.setText("Wystąpił błąd.");
             Arrays.asList(App.getInstance().getCarStorage(), App.getInstance().getClientStorage()).forEach(EntryStorage::clear);
             if (!App.getInstance().openGui(NodeType.LISTS)) ((ListsController)App.getInstance().getController(NodeType.LISTS)).onClickSearch(null);
         });
@@ -108,7 +100,7 @@ public class MainController extends Controller {
             Arrays.asList(App.getInstance().getCarStorage(), App.getInstance().getClientStorage()).forEach(EntryStorage::clear);
             if (!App.getInstance().openGui(NodeType.LISTS)) ((ListsController)App.getInstance().getController(NodeType.LISTS)).onClickSearch(null);
         });
-        alert.setOnCloseRequest(dialogEvent ->{
+        progressAlert.runOnClose(() -> {
             if (this.fileTask != null) this.fileTask.cancel();
         });
         new Thread(fileTask).start();
@@ -123,9 +115,7 @@ public class MainController extends Controller {
             this.onClickSaveAs(event);
             return;
         }
-        final ProgressIndicator progressBar = new ProgressBar();
-        final Alert alert = new ProgressAlertBuilder(Alert.AlertType.INFORMATION, "Plik", "Zapisywanie...", progressBar).buildAndShow();
-        alert.show();
+        final ProgressAlert progressAlert = new ProgressAlert("Zapis...").show();
         this.fileTask = new Task<>() {
             @Override
             protected Boolean call() {
@@ -134,19 +124,19 @@ public class MainController extends Controller {
                 return App.getInstance().getFileDataManager().save(progress);
             }
         };
-        progressBar.progressProperty().bind(fileTask.progressProperty());
+        progressAlert.bind(fileTask.progressProperty());
         fileTask.setOnSucceeded(workerStateEvent -> {
             try{
-                ProgressAlertBuilder.endLoading(alert, fileTask.get() ? "Zapis zakończony" : "Wystąpił błąd.");
+                progressAlert.endLoading(fileTask.get() ? "Zapis zakończony." : "Wystąpił błąd.");
                 return;
             }catch (InterruptedException | ExecutionException e){
                 e.printStackTrace();
             }
-            ProgressAlertBuilder.endLoading(alert, "Wystąpił błąd.");
+            progressAlert.endLoading("Wystąpił błąd.");
         });
-        fileTask.setOnFailed(workerStateEvent -> ProgressAlertBuilder.setContentText(alert, "Wystąpił błąd."));
+        fileTask.setOnFailed(workerStateEvent -> progressAlert.endLoading("Wystąpił błąd."));
         new Thread(fileTask).start();
-        alert.setOnCloseRequest(dialogEvent -> {
+        progressAlert.runOnClose(() -> {
             if (fileTask != null)  fileTask.cancel();
         });
     }
@@ -161,7 +151,7 @@ public class MainController extends Controller {
             file = new File(file.getName() + FileDataManager.FILE_EXTENSION);
         }
         else if (!file.getName().endsWith(FileDataManager.FILE_EXTENSION)){
-            new AlertBuilder(Alert.AlertType.ERROR, "Plik", "Nieprawidłowy format pliku.").buildAndShow();
+            new Alert("Nieprawidłowy format pliku").show();
             return;
         }
         App.getInstance().setFileDataManager(new FileDataManager(file));

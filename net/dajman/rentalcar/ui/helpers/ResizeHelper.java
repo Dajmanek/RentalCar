@@ -1,35 +1,43 @@
 package net.dajman.rentalcar.ui.helpers;
 
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import net.dajman.rentalcar.App;
 
 public class ResizeHelper {
 
-    private final int border;
+    private final int borderMin;
+    private final int borderMax;
     private final Stage stage;
 
-    private double windowMaxX;
-    private double windowMaxY;
-    private Side side;
-
+    private transient double windowMaxX;
+    private transient double windowMaxY;
+    private transient Side side;
 
     public ResizeHelper(final Stage stage){
-        this(stage, 8);
+        this(stage, 8, App.SHADOW_RADIUS);
     }
 
-    public ResizeHelper(final Stage stage, final int border){
+
+    public ResizeHelper(final Stage stage, final int border, final int shadowRadius){
         this.side = Side.NONE;
         this.stage = stage;
-        this.border = border;
-    }
-
-    public void addListener(final Node node){
-        node.addEventHandler(MouseEvent.MOUSE_PRESSED, this::mousePressed);
-        node.addEventHandler(MouseEvent.MOUSE_RELEASED, this::mouseReleased);
-        node.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::mouseDragged);
-        node.addEventHandler(MouseEvent.MOUSE_MOVED, this::mouseMoved);
+        this.borderMin = Math.min(0, shadowRadius - border);
+        this.borderMax = this.borderMin + border;
+        this.stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                if (!newValue){
+                    return;
+                }
+                this.stage.setWidth(this.stage.getWidth() + App.SHADOW_RADIUS * 2);
+                this.stage.setHeight(this.stage.getHeight() + App.SHADOW_RADIUS * 2);
+                this.stage.setX(this.stage.getX() - App.SHADOW_RADIUS);
+                this.stage.setY(this.stage.getY() - App.SHADOW_RADIUS);
+            });
+        });
     }
 
     public ResizeHelper register(){
@@ -38,6 +46,13 @@ public class ResizeHelper {
         this.stage.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::mouseDragged);
         this.stage.addEventHandler(MouseEvent.MOUSE_MOVED, this::mouseMoved);
         return this;
+    }
+
+    public void register(final Node node){
+        node.addEventHandler(MouseEvent.MOUSE_PRESSED, this::mousePressed);
+        node.addEventHandler(MouseEvent.MOUSE_RELEASED, this::mouseReleased);
+        node.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::mouseDragged);
+        node.addEventHandler(MouseEvent.MOUSE_MOVED, this::mouseMoved);
     }
 
     private void mouseReleased(final MouseEvent mouseEvent){
@@ -96,28 +111,28 @@ public class ResizeHelper {
     private Side getSide(final double mouseSceneX, final double mouseSceneY){
         final double width = this.stage.getWidth();
         final double height = this.stage.getHeight();
-        if (mouseSceneX < this.border){
-            if (mouseSceneY < this.border){
+        if (mouseSceneX <= this.borderMax && mouseSceneX >= this.borderMin){
+            if (mouseSceneY <= this.borderMax && mouseSceneY >= this.borderMin){
                 return Side.TOP_LEFT;
             }
-            if (mouseSceneY > height - this.border){
+            if (mouseSceneY >= height - this.borderMax && mouseSceneY <= height - this.borderMin){
                 return Side.BOTTOM_LEFT;
             }
             return Side.LEFT;
         }
-        if (mouseSceneX > width - this.border){
-            if (mouseSceneY < this.border){
+        if (mouseSceneX >= width - this.borderMax && mouseSceneX <= width - this.borderMin){
+            if (mouseSceneY <= this.borderMax && mouseSceneY >= this.borderMin){
                 return Side.TOP_RIGHT;
             }
-            if (mouseSceneY > height - this.border){
+            if (mouseSceneY >= height - this.borderMax && mouseSceneY <= height - this.borderMin){
                 return Side.BOTTOM_RIGHT;
             }
             return Side.RIGHT;
         }
-        if (mouseSceneY < this.border){
+        if (mouseSceneY <= this.borderMax && mouseSceneY >= this.borderMin){
             return Side.TOP;
         }
-        if (mouseSceneY > height - this.border){
+        if (mouseSceneY >= height - this.borderMax && mouseSceneY <= this.borderMin){
             return Side.BOTTOM;
         }
         return Side.NONE;
@@ -135,8 +150,7 @@ public class ResizeHelper {
                     case LEFT -> Cursor.W_RESIZE;
                     case TOP_LEFT -> Cursor.NW_RESIZE;
                     default -> Cursor.DEFAULT;
-                }
-                );
+                });
     }
 
     enum Side{
@@ -150,7 +164,4 @@ public class ResizeHelper {
         TOP_LEFT,
         NONE;
     }
-
-
-
 }

@@ -1,7 +1,6 @@
 package net.dajman.rentalcar;
 
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.dajman.rentalcar.basic.Car;
@@ -11,18 +10,22 @@ import net.dajman.rentalcar.ui.HistoryElement;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.data.managers.FileDataManager;
 import net.dajman.rentalcar.data.storage.EntryStorage;
+import net.dajman.rentalcar.ui.alert.ProgressAlert;
 import net.dajman.rentalcar.ui.helpers.DragHelper;
 import net.dajman.rentalcar.ui.helpers.ResizeHelper;
 import net.dajman.rentalcar.ui.loader.MainNodeLoader;
 import net.dajman.rentalcar.ui.loader.NodeLoader;
 import net.dajman.rentalcar.ui.controller.IController;
+import net.dajman.rentalcar.ui.utils.Images;
 
 import java.util.*;
 
 public class App extends Application {
 
-    private static App application;
+    public static final transient int SHADOW_RADIUS = 15;
+    public static final transient String STYLESHEET = App.class.getResource("ui/resources/css/style.css").toExternalForm();
 
+    private static App application;
 
     private FileDataManager fileDataManager;
     private EntryStorage<Car> carStorage;
@@ -74,6 +77,10 @@ public class App extends Application {
         return openedGui;
     }
 
+    public MainNodeLoader getMainNodeLoader() {
+        return mainNodeLoader;
+    }
+
     public IController getController(final NodeType nodeType){
         return this.controllers.get(nodeType);
     }
@@ -90,38 +97,20 @@ public class App extends Application {
         this.controllers = new HashMap<>();
         this.history = new ArrayList<>();
 
-
-        //TEST
-        for(int i = 0; i < 20; i++){
-            final Car car = new Car(20.0F, "Brand" + i, "Model");
-            this.carStorage.add(car);
-        }
-
-        for(int i = 0; i < 2; i++){
-            final Client client = new Client("FN" + i, "LN" + i, "123123123", "25-499", "city", "street", 25, 13);
-            if (i == 0){
-                final Car car = this.carStorage.getAll().stream().findAny().orElse(null);
-                if (car != null){
-                    client.addRentedCar(car);
-                    car.setRentalDate(System.currentTimeMillis());
-                    car.setClient(client);
-                }
-            }
-            this.clientStorage.add(client);
-        }
-        // END TEST
-
         this.stage = stage;
         this.stage.setMinWidth(750.0);
         this.stage.setMinHeight(500.0);
+        this.stage.setMaxHeight(Double.MAX_VALUE);
+        this.stage.setMaxWidth(Double.MAX_VALUE);
         this.stage.setTitle("RentalCar");
-        this.stage.getIcons().add(new Image(App.class.getResourceAsStream("ui/resources/img/icon.png")));
+        this.stage.getIcons().add(Images.icon);
         this.stage.initStyle(StageStyle.TRANSPARENT);
         this.resizeHelper = new ResizeHelper(this.stage).register();
         this.dragHelper = new DragHelper(this.stage);
 
         this.mainNodeLoader = new MainNodeLoader("main");
         this.mainNodeLoader.registerDrag(this.dragHelper);
+        this.mainNodeLoader.registerResize(this.resizeHelper);
 
         this.nodeLoaders = new HashMap<>();
         this.nodeLoaders.put(NodeType.LISTS, new NodeLoader("lists"));
@@ -134,23 +123,7 @@ public class App extends Application {
         this.stage.show();
         this.controllers.get(NodeType.MAIN).init();
         this.openGui(NodeType.LISTS);
-
-
-
-        /*final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/resources/fxml/test_resize.fxml"));
-        dragHelper.register();
-
-        this.stage.initStyle(StageStyle.TRANSPARENT);
-        try {
-            this.stage.setScene(new Scene((Parent) fxmlLoader.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.stage.show();
-        TestController.inst.init();*/
-
-
-
+        new ProgressAlert(System.getProperty("java.version")).show();
     }
 
     public HistoryElement getBack(){
@@ -170,7 +143,6 @@ public class App extends Application {
     public boolean openGui(final HistoryElement historyElement){
         return this.openGui(historyElement.getNodeType(), false, historyElement.getObjects());
     }
-
 
     public boolean openGui(final NodeType nodeType, final Object... objects){
         return this.openGui(nodeType, true, objects);

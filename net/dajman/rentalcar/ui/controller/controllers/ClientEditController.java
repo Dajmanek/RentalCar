@@ -1,13 +1,7 @@
 package net.dajman.rentalcar.ui.controller.controllers;
 
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventTarget;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

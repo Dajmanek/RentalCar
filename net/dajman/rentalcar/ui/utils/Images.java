@@ -16,7 +16,7 @@ public class Images {
     public static final transient Image imageEmpty = new Image(App.class.getResourceAsStream("ui/resources/img/no_image.png"));
     public static final transient Image loadingGif = new Image(App.class.getResourceAsStream("ui/resources/img/loading.gif"));
     public static final transient Image imageUser = new Image(App.class.getResourceAsStream("ui/resources/img/user.png"));
-
+    public static final transient Image icon = new Image(App.class.getResourceAsStream("ui/resources/img/icon.png"));
 
 
 }

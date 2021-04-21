@@ -54,6 +54,7 @@ public class FileDataManager implements DataManager {
             fos.write(headerBytes);
             progress.set(0.05);
 
+
             // WRITING CLIENTS
             int i = 0;
             for(String text : clientsSerialized){
@@ -120,6 +121,7 @@ public class FileDataManager implements DataManager {
                 byte[] textLength = new byte[4];
                 fis.read(textLength);
                 byte[] textBytes = new byte[this.readInt(textLength, 0)];
+                fis.read(textBytes);
                 clientsSerialized.add(new String(textBytes));
                 progress.set(((double) (i + 1) / clientsAmount)  * 0.4);
             }
@@ -134,6 +136,7 @@ public class FileDataManager implements DataManager {
                 e.printStackTrace();
                 return false;
             }
+            System.out.println(clients.size());
             App.getInstance().getClientStorage().addAll(clients);
             progress.set(0.45);
 
@@ -162,6 +165,8 @@ public class FileDataManager implements DataManager {
                 cars.add(car);
                 progress.set(((double) (i + 1) / carsAmount) * 0.55 + 0.45);
             }
+            fis.close();
+            progress.set(1);
             App.getInstance().getCarStorage().addAll(cars);
             return true;
         }catch (IOException e){

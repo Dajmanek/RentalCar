@@ -48,7 +48,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
 
     private Node buildMain(){
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/resources/css/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.STYLESHEET);
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);
@@ -152,7 +152,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
 
     private Node buildClientRented(){
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/resources/css/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.STYLESHEET);
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);
@@ -242,7 +242,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
 
     private Node buildClientAvailable(){
         final GridPane gridPane = new GridPane();
-        gridPane.getStylesheets().add(App.class.getResource("ui/resources/css/style.css").toExternalForm());
+        gridPane.getStylesheets().add(App.STYLESHEET);
         gridPane.setMaxWidth(Double.MAX_VALUE);
         final ColumnConstraints column = new ColumnConstraints();
         column.setMinWidth(10);

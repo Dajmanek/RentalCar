@@ -8,16 +8,14 @@ import java.io.IOException;
 
 public class NodeLoader {
 
-    protected final String css;
     private Parent parent;
 
 
     public NodeLoader(final String styleFileName){
-        this.css = App.class.getResource("ui/resources/css/style.css").toExternalForm();
         final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/resources/fxml/" + styleFileName + ".fxml"));
         try{
             this.parent = (Parent)fxmlLoader.load();
-            this.parent.getStylesheets().add(css);
+            this.parent.getStylesheets().add(App.STYLESHEET);
         }catch (IOException e){
             e.printStackTrace();
         }

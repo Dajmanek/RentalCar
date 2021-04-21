@@ -1,7 +1,6 @@
 package net.dajman.rentalcar;
 
 
-import java.awt.*;
 
 public class Main {
 

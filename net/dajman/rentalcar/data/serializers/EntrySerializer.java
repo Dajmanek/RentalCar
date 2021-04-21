@@ -43,6 +43,8 @@ public class EntrySerializer<T extends Entry<T>> implements Serializer<T> {
             sb.append(entry.serialize());
             i++;
         }
+        if (!sb.isEmpty())
+            list.add(sb.toString());
         return list;
     }
 
@@ -64,7 +66,7 @@ public class EntrySerializer<T extends Entry<T>> implements Serializer<T> {
         final Set<T> entrySet = new HashSet<>();
         for(String text : list){
             final String[] entrySplited = text.split(";");
-            for(String entryText: entrySplited){
+            for(String entryText : entrySplited){
                 entrySet.add(this.entry.deserialize(entryText));
             }
         }

@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import net.dajman.rentalcar.App;
 
 public class DragHelper {
 
@@ -40,10 +41,8 @@ public class DragHelper {
         }
         final double x = mouseEvent.getScreenX() + this.x;
         final double y = mouseEvent.getScreenY() + this.y;
-        if (this.containsXOnScreens(x)){
-            this.stage.setX(x);
-        }
-        if (this.containsYOnScreens(y)){
+        this.stage.setX(x);
+        if (this.containsYOnScreens(y + App.SHADOW_RADIUS)){
             this.stage.setY(y);
         }
     }

@@ -17,8 +17,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-
 <GridPane minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.dajman.rentalcar.ui.controller.controllers.ListsController">
     <columnConstraints>
         <ColumnConstraints maxWidth="30.0" minWidth="4.600001430511476" prefWidth="30.0" />
@@ -68,7 +66,7 @@
                         <ScrollPane layoutX="277.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" />
                     </content>
                <content>
-                  <ScrollPane fx:id="carsContainer" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                  <ScrollPane fx:id="carsContainer" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
                      <content>
                         <GridPane>
                            <columnConstraints>
@@ -176,7 +174,7 @@
                 </Tab>
                 <Tab text="Lista klientów">
                <content>
-                  <ScrollPane fx:id="clientsContainer" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                  <ScrollPane fx:id="clientsContainer" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
                      <content>
                         <GridPane>
                            <columnConstraints>

@@ -1,7 +1,9 @@
-#mainContainer{
+
+.mainContainer{
     -fx-border-color: #eaeaea;
     -fx-border-width: 1;
     -fx-border-style: solid;
+    -fx-background-color: white;
 }
 
 .tab-pane *.tab-header-area *.tab-header-background{
@@ -9,6 +11,7 @@
     -fx-border-color: #eaeaea;
     -fx-border-width: 1;
     -fx-border-style: hidden hidden solid hidden;
+
 }
 
 TabPane{
@@ -37,10 +40,8 @@ VBox, GridPane, ScrollPane{
 }
 
 
-
-
 .whiteContainer{
-    -fx-background-color: #fcfcfc;
+    -fx-background-color: white;
     -fx-padding: 40;
     -fx-border-color: #d6d6d6;
     -fx-border-width: 1;
@@ -51,6 +52,53 @@ VBox, GridPane, ScrollPane{
     -fx-border-color: #b3b3b3;
     -fx-border-width: 1;
     -fx-border-style: solid;
+}
+
+Button{
+    -fx-background-color: #f6f6f6;
+    -fx-background-radius: 2;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-radius: 2;
+
+}
+Button:hover{
+    -fx-background-color: #efefef;
+    -fx-border-color: #e2e2e2;
+
+}
+
+TextField{
+    -fx-border-radius: 1;
+    -fx-background-color: white;
+    -fx-border-color: #cfcece;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+}
+
+TextField:focused{
+    -fx-effect: dropshadow(three-pass-box, rgba(181, 181, 181, 0.5), 4, 0 ,0 ,0);
+}
+
+.tab{
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
+    -fx-border-width: 1;
+    -fx-border-style: solid solid hidden solid;
+    -fx-border-color: #d4d4d4;
+    -fx-background-color: #efefef;
+    -fx-background-insets: 0 2 0 0;
+    -fx-border-insets: 0 2 0 0;
+    -fx-padding: 2 6 2 4;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+
+
+}
+.tab:selected{
+    -fx-background-color: white;
 }
 
 

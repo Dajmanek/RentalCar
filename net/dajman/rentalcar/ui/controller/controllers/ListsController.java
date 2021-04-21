@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.layout.GridPane;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.builder.list.CarListBuilder;
