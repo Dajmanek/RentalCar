@@ -118,10 +118,10 @@ public class ResizeHelper {
             }
             return Side.RIGHT;
         }
-        if (mouseSceneY <= this.borderMax && mouseSceneY >= this.borderMin){
+        if (mouseSceneY <= this.borderMax && mouseSceneY >= height ){
             return Side.TOP;
         }
-        if (mouseSceneY >= height - this.borderMax && mouseSceneY <= this.borderMin){
+        if (mouseSceneY >= height - this.borderMax && mouseSceneY <= height - this.borderMin){
             return Side.BOTTOM;
         }
         return Side.NONE;

@@ -106,7 +106,7 @@ public class App extends Application {
         this.stage.getIcons().add(Images.icon);
         this.stage.initStyle(StageStyle.TRANSPARENT);
         this.stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        this.resizeHelper = new ResizeHelper(this.stage).register();
+        this.resizeHelper = new ResizeHelper(this.stage, 15, App.SHADOW_RADIUS).register();
         this.dragHelper = new DragHelper(this.stage, App.SHADOW_RADIUS, true);
 
         this.mainNodeLoader = new MainNodeLoader("main");

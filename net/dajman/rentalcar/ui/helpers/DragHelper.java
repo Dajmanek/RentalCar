@@ -25,7 +25,7 @@ public class DragHelper {
     public DragHelper(final Stage stage, final double shadowRadius, final boolean topFullScreen, final Node... nodes){
         this.stage = stage;
         this.shadowRadius = shadowRadius;
-        this.topFullScreen = topFullScreen;
+        this.topFullScreen = false; // TODO false is test value
         if (topFullScreen){
             this.prepareFullScreenBox = new PrepareFullScreenBox(stage, shadowRadius);
         }
