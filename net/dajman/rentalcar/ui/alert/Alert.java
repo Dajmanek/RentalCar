@@ -22,7 +22,7 @@ public class Alert {
 
     protected static final transient String BUTTON_CLOSE = "Zamknij";
 
-    private Stage stage;
+    protected Stage stage;
     private Runnable onClose;
 
 
@@ -108,7 +108,7 @@ public class Alert {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setAlwaysOnTop(true);
 
-        final DragHelper dragHelper = new DragHelper(this.stage);
+        final DragHelper dragHelper = new DragHelper(this.stage, App.SHADOW_RADIUS);
         dragHelper.register(topPane);
     }
 

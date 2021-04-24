@@ -3,12 +3,11 @@ package net.dajman.rentalcar.ui.controller.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.basic.Client;
 import net.dajman.rentalcar.ui.NodeType;
-import net.dajman.rentalcar.ui.builder.alert.AlertBuilder;
+import net.dajman.rentalcar.ui.alert.Alert;
 import net.dajman.rentalcar.ui.controller.Controller;
 
 import java.util.Optional;
@@ -112,7 +111,7 @@ public class ClientEditController extends Controller {
             return;
         }
         if (!phoneNumber.matches("[0-9]+")){
-            new AlertBuilder(Alert.AlertType.ERROR, "Pole \"Nr telefonu\" może składać się tylko z liczb.").buildAndShow();
+            new Alert("Pole \"Nr telefonu\" może składać się tylko z liczb.");
             return;
         }
         final String postCode = this.postCode.getText();
@@ -120,7 +119,7 @@ public class ClientEditController extends Controller {
             return;
         }
         if (postCode.length() != 6 || postCode.charAt(2) != '-'){
-            new AlertBuilder(Alert.AlertType.ERROR, "Pole \"Kod pocztowy\" zostało błędnie wypełnione.");
+            new Alert("Pole \"Kod pocztowy\" zostało błędnie wypełnione.");
             return;
         }
         final String city = this.city.getText();
@@ -137,7 +136,7 @@ public class ClientEditController extends Controller {
         try{
             buildingNumber = Integer.parseInt(buildingNumberText);
         }catch (NumberFormatException e){
-            new AlertBuilder(Alert.AlertType.ERROR,  "Pole \"Nr budynku\" musi być liczbą.").buildAndShow();
+            new Alert("Pole \"Nr budynku\" musi być liczbą.");
             e.printStackTrace();
             return;
         }
@@ -146,7 +145,7 @@ public class ClientEditController extends Controller {
             try{
                 flatNumber = Integer.parseInt(this.flatNumber.getText());
             }catch (NumberFormatException e){
-                new AlertBuilder(Alert.AlertType.ERROR,  "Pole \"Nr mieszkania\" musi być liczbą.").buildAndShow();
+                new Alert("Pole \"Nr mieszkania\" musi być liczbą.");
                 e.printStackTrace();
                 return;
             }
@@ -172,7 +171,7 @@ public class ClientEditController extends Controller {
         if (!text.isBlank()){
             return true;
         }
-        new AlertBuilder(Alert.AlertType.ERROR, "Pole \"" + fieldName + "\" nie może być puste.").buildAndShow();
+        new Alert("Pole \"" + fieldName + "\" nie może być puste.");
         return false;
     }
 }

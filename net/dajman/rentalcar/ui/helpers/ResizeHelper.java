@@ -27,17 +27,6 @@ public class ResizeHelper {
         this.stage = stage;
         this.borderMin = Math.min(0, shadowRadius - border);
         this.borderMax = this.borderMin + border;
-        this.stage.fullScreenProperty().addListener((obs, oldValue, newValue) -> {
-            Platform.runLater(() -> {
-                if (!newValue){
-                    return;
-                }
-                this.stage.setWidth(this.stage.getWidth() + App.SHADOW_RADIUS * 2);
-                this.stage.setHeight(this.stage.getHeight() + App.SHADOW_RADIUS * 2);
-                this.stage.setX(this.stage.getX() - App.SHADOW_RADIUS);
-                this.stage.setY(this.stage.getY() - App.SHADOW_RADIUS);
-            });
-        });
     }
 
     public ResizeHelper register(){

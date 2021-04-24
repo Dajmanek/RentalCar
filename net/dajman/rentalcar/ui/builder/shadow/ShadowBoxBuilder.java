@@ -17,7 +17,7 @@ public class ShadowBoxBuilder implements Builder<GridPane> {
     private final int shadowRadius;
 
     public ShadowBoxBuilder(final Node node){
-        this(node, 50);
+        this(node, 10);
     }
 
     public ShadowBoxBuilder(final Node node, final int shadowRadius){

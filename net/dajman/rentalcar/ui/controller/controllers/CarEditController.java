@@ -3,7 +3,6 @@ package net.dajman.rentalcar.ui.controller.controllers;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +11,8 @@ import javafx.stage.FileChooser;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.basic.Car;
 import net.dajman.rentalcar.ui.NodeType;
-import net.dajman.rentalcar.ui.builder.alert.AlertBuilder;
+
+import net.dajman.rentalcar.ui.alert.Alert;
 import net.dajman.rentalcar.ui.controller.Controller;
 import net.dajman.rentalcar.ui.utils.Images;
 
@@ -89,7 +89,7 @@ public class CarEditController extends Controller {
         }
         final String fileExtension = file.getName().substring(file.getName().lastIndexOf('.') + 1);
         if (!fileExtension.equalsIgnoreCase("png") && !fileExtension.equalsIgnoreCase("jpg")){
-            new AlertBuilder(Alert.AlertType.ERROR, "Plik", "Wybrano niepoprawny plik.").buildAndShow();
+            new Alert("Wybrano niepoprawny plik.").show();
             return;
         }
         try{
@@ -99,7 +99,7 @@ public class CarEditController extends Controller {
             this.imageBytes = baos.toByteArray();
         }catch (IOException | IllegalArgumentException e){
             e.printStackTrace();
-            new AlertBuilder(Alert.AlertType.ERROR, "Plik", "Wystapil problem z odczytem pliku.").buildAndShow();
+            new Alert("Wystapil problem z odczytem pliku.").show();
             return;
         }
         this.imageView.setImage(new Image(new ByteArrayInputStream(this.imageBytes)));
@@ -110,12 +110,12 @@ public class CarEditController extends Controller {
         try{
              price = Float.parseFloat(this.priceField.getText());
             if (price < 0.01){
-                new AlertBuilder(Alert.AlertType.ERROR, "Błąd", "Cena nie może być mniejsza niż 0.01").buildAndShow();
+                new Alert("Cena nie może być mniejsza niż 0.01.").show();
                 return;
             }
         }catch (NumberFormatException e){
             e.printStackTrace();
-            new AlertBuilder(Alert.AlertType.ERROR, "Błąd", "Wpisana wartość cena jest niepoprawna.").buildAndShow();
+            new Alert("Wpisana wartość cena jest niepoprawna.").show();
             return;
         }
         boolean newCar = this.car == null;

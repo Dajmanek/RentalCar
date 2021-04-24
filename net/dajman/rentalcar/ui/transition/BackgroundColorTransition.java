@@ -22,7 +22,6 @@ public class BackgroundColorTransition extends Transition {
         this.setCycleDuration(duration);
     }
 
-
     @Override
     protected void interpolate(double v) {
         final double red = oldColor.getRed() + (newColor.getRed() - oldColor.getRed()) * v;
@@ -31,4 +30,5 @@ public class BackgroundColorTransition extends Transition {
         final double opacity = oldColor.getOpacity() + (newColor.getOpacity() - oldColor.getOpacity()) * v;
         this.nodes.forEach(node -> node.setBackground(new Background(new BackgroundFill(new Color(red, green, blue, opacity), CornerRadii.EMPTY, Insets.EMPTY))));
     }
+
 }

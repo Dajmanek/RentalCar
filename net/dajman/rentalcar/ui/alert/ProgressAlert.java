@@ -13,8 +13,7 @@ public class ProgressAlert extends Alert{
 
     private static final transient String BUTTON_CANCEL = "Anuluj";
 
-    private Stage stage;
-    private ProgressIndicator progressIndicator;
+    private final ProgressIndicator progressIndicator;
 
     public ProgressAlert(final String text){
         this(null, text, BUTTON_CANCEL, new ProgressBar(0));

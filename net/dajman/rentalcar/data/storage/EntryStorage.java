@@ -27,7 +27,7 @@ public class EntryStorage<T extends Entry<T>>  extends Storage<T> {
         if (objects == null){
             return false;
         }
-        final int maxId = objects.parallelStream().map(T::getId).mapToInt(v -> v).max().orElseGet(() -> 0);
+        final int maxId = objects.parallelStream().map(T::getId).mapToInt(i -> i).max().orElse(0);
         this.maxId = Math.max(this.maxId, maxId);
         return super.addAll(objects);
     }

@@ -43,18 +43,14 @@ public class FileDataManager implements DataManager {
             final Set<Car> cars = App.getInstance().getCarStorage().getAll();
             final int clientsAmount = clients.size();
             final int carsAmount = cars.size();
-
             // WRITING HEADER
             final byte[] headerBytes = new byte[12];
             this.writeInt(headerBytes, 0, clientsAmount);
             this.writeInt(headerBytes, 4, carsAmount);
-
             final List<String> clientsSerialized = new EntrySerializer<Client>().serialize(clients, 100);
             this.writeInt(headerBytes, 8, clientsSerialized.size());
             fos.write(headerBytes);
             progress.set(0.05);
-
-
             // WRITING CLIENTS
             int i = 0;
             for(String text : clientsSerialized){
@@ -65,7 +61,6 @@ public class FileDataManager implements DataManager {
                 i++;
                 progress.set(0.05 + (double) i / clientsAmount * 0.4) ;
             }
-
             // WRITING CARS
             for(Car car : cars){
                 final byte[] carBytes = car.serialize().getBytes();
@@ -77,7 +72,6 @@ public class FileDataManager implements DataManager {
                 if (imageBytes != null && imageBytes.length > 0) fos.write(car.getImageBytes());
                 progress.set(0.45 + (double) i / carsAmount);
             }
-
             fos.flush();
             fos.close();
             progress.set(1);
@@ -109,11 +103,8 @@ public class FileDataManager implements DataManager {
 
             final byte[] headerBytes = new byte[12];
             fis.read(headerBytes);
-
             final int clientsAmount = this.readInt(headerBytes, 0);
             final int carsAmount = this.readInt(headerBytes, 4);
-
-
             // LOAD CLIENTS
             final List<String> clientsSerialized = new ArrayList<>();
             final int clientsLinesAmount = this.readInt(headerBytes, 8);
@@ -139,8 +130,6 @@ public class FileDataManager implements DataManager {
             System.out.println(clients.size());
             App.getInstance().getClientStorage().addAll(clients);
             progress.set(0.45);
-
-
             // LOAD CARS
             final Serializer<Car> carSerializer = new EntrySerializer<>(new Car());
             final Set<Car> cars = new HashSet<>();

@@ -50,8 +50,6 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             final RowConstraints rowConstraints = new RowConstraints();
             rowConstraints.setPrefHeight(ROW_HEIGHT);
             gridPane.getRowConstraints().add(rowConstraints);
-
-
             // BORDER CONTAINER
             final BorderPane borderPane = new BorderPane();
             borderPane.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
@@ -64,7 +62,6 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             // BORDER CONTAINER (ON CLICK)
             borderPane.setOnMouseClicked(e -> App.getInstance().openGui(NodeType.CLIENT, client));
             gridPane.add(borderPane, 0, index++);
-
             // MAIN HBOX
             final HBox hBox = new HBox();
             hBox.setPrefHeight(60);
@@ -72,25 +69,21 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             hBox.setPadding(new Insets(5, 10, 5, 10));
             BorderPane.setAlignment(hBox, Pos.CENTER_LEFT);
             borderPane.setLeft(hBox);
-
             // IMAGE
             final BorderPane imageBorderPane = new BorderPane();
             hBox.getChildren().add(imageBorderPane);
             imageBorderPane.setStyle("-fx-background-color: rgba(0,0,0,0)");
-
             final ImageView imageView = new ImageView(Images.imageUser);
             imageView.setFitHeight(45);
             imageView.setFitWidth(45);
             BorderPane.setAlignment(imageView, Pos.CENTER);
             imageBorderPane.setCenter(imageView);
-
             // LEFT DATA
             final VBox vBox = new VBox();
             vBox.setPrefHeight(60);
             vBox.setPrefWidth(310);
             vBox.setPadding(new Insets(5, 0, 0, 0));
             hBox.getChildren().add(vBox);
-
             // LEFT DATA (FIRST LINE)
             final HBox hBoxName = new HBox();
             hBoxName.setSpacing(5);
@@ -103,7 +96,6 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             labelNameValue.setPrefHeight(20);
             labelNameValue.setFont(Font.font("System", FontWeight.NORMAL, 13));
             hBoxName.getChildren().addAll(labelName, labelNameValue);
-
             // LEFT DATA (SECOND LINE)
             final HBox hBoxPhone = new HBox();
             hBoxPhone.setSpacing(5);
@@ -116,16 +108,12 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             labelPhoneValue.setPrefHeight(20);
             labelPhoneValue.setFont(Font.font("System", FontWeight.NORMAL, 13));
             hBoxPhone.getChildren().addAll(labelPhone, labelPhoneValue);
-
-
-
             // RIGHT DATA
             final VBox vBox1 = new VBox();
             vBox1.setPrefHeight(60);
             vBox1.setPrefWidth(270);
             vBox1.setPadding(new Insets(5, 0, 0 ,0));
             hBox.getChildren().add(vBox1);
-
             // RIGHT (FIRST LINE)
             final HBox hBoxRented = new HBox();
             hBoxRented.setSpacing(5);
@@ -138,7 +126,6 @@ public class ClientListBuilder extends EntryListBuilder<Client> {
             labelRentedValue.setPrefHeight(20);
             labelRentedValue.setFont(Font.font("System", FontWeight.NORMAL, 13));
             hBoxRented.getChildren().addAll(labelRented, labelRentedValue);
-
             // RIGHT DATA (SECOND LINE)
             final HBox hBoxToPay = new HBox();
             hBoxToPay.setSpacing(5);
