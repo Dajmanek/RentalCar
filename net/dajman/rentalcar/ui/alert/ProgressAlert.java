@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class ProgressAlert extends Alert{
 
     private static final transient String BUTTON_CANCEL = "Anuluj";
-
     private final ProgressIndicator progressIndicator;
 
     public ProgressAlert(final String text){

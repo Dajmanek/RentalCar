@@ -1,4 +1,4 @@
-package net.dajman.rentalcar.ui.transition;
+package net.dajman.rentalcar.ui.transition.fx;
 
 import javafx.animation.Transition;
 import javafx.geometry.Insets;

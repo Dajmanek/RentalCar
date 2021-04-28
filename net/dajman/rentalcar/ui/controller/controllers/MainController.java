@@ -15,7 +15,7 @@ import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.alert.Alert;
 import net.dajman.rentalcar.ui.alert.ProgressAlert;
 import net.dajman.rentalcar.ui.controller.Controller;
-import net.dajman.rentalcar.ui.transition.ImageTransition;
+import net.dajman.rentalcar.ui.transition.fx.ImageTransition;
 import net.dajman.rentalcar.ui.utils.Images;
 
 import java.io.File;

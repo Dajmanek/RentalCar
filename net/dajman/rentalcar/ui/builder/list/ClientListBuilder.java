@@ -16,7 +16,7 @@ import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.basic.Client;
 import net.dajman.rentalcar.ui.utils.Colors;
 import net.dajman.rentalcar.ui.NodeType;
-import net.dajman.rentalcar.ui.transition.BackgroundColorTransition;
+import net.dajman.rentalcar.ui.transition.fx.BackgroundColorTransition;
 import net.dajman.rentalcar.ui.utils.Images;
 
 import java.util.Set;

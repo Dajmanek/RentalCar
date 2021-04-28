@@ -11,7 +11,9 @@ public class DragHelper {
     private final Stage stage;
     private final boolean topFullScreen;
     private PrepareFullScreenBox prepareFullScreenBox;
-    private double shadowRadius;
+    private final double shadowRadius;
+    private double width;
+    private double height;
     private double x;
     private double y;
 
@@ -25,7 +27,7 @@ public class DragHelper {
     public DragHelper(final Stage stage, final double shadowRadius, final boolean topFullScreen, final Node... nodes){
         this.stage = stage;
         this.shadowRadius = shadowRadius;
-        this.topFullScreen = false; // TODO false is test value
+        this.topFullScreen = topFullScreen;
         if (topFullScreen){
             this.prepareFullScreenBox = new PrepareFullScreenBox(stage, shadowRadius);
         }
@@ -50,6 +52,7 @@ public class DragHelper {
         }
     }
 
+
     private void mousePressed(final MouseEvent mouseEvent){
         this.x = mouseEvent.getScreenX() - this.stage.getX();
         this.y = mouseEvent.getScreenY() - this.stage.getY();
@@ -65,6 +68,8 @@ public class DragHelper {
         if (stageY >= screen.getBounds().getMinY() && stageY <= screen.getBounds().getMinY() + 4){
             if (!stage.isFullScreen()){
                 stage.setX(screen.getBounds().getMinX());
+                /*this.width = this.stage.getWidth();
+                this.height = this.stage.getHeight();*/
                 stage.setFullScreen(true);
             }
             return;
@@ -77,29 +82,37 @@ public class DragHelper {
         }
         final double x = mouseEvent.getScreenX() - this.x;
         final double y = mouseEvent.getScreenY() - this.y;
+
+        final Screen screen = this.getScreen(mouseEvent.getScreenX(), mouseEvent.getScreenY());
+        final double stageY = this.stage.getY() + this.shadowRadius;
+
         if (this.topFullScreen){
-            final Screen screen = this.getScreen(mouseEvent.getScreenX(), mouseEvent.getScreenY());
-            final double stageY = this.stage.getY() + this.shadowRadius;
-            if (stageY >= screen.getBounds().getMinY() && stageY < 5){
-                if (!stage.isFullScreen()){
-                    this.prepareFullScreenBox.show();
-                }
-            }else{
-                this.prepareFullScreenBox.hide();
-            }
             if (this.stage.isFullScreen()){
                 if (screen.getBounds().getMinY() == y){
                     return;
                 }
                 this.stage.setFullScreen(false);
+                /*if (this.stage.getWidth() != this.width || this.stage.getHeight() != this.height){
+                    this.stage.setWidth(this.width);
+                    this.stage.setHeight(this.height);
+                }*/
                 this.x = this.x / (screen.getBounds().getWidth() / this.stage.getWidth());
-                return;
             }
         }
 
         this.stage.setX(x);
         if (this.containsYOnScreens(y + this.shadowRadius)){
             this.stage.setY(y);
+        }
+
+        if (topFullScreen){
+            if (stageY >= screen.getBounds().getMinY() && stageY < 5){
+                if (!stage.isFullScreen()){
+                    this.prepareFullScreenBox.show(mouseEvent.getScreenX(), mouseEvent.getScreenY());
+                }
+            }else{
+                this.prepareFullScreenBox.hide();
+            }
         }
     }
 

@@ -15,7 +15,7 @@ import javafx.util.Duration;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.ui.builder.shadow.ShadowBoxBuilder;
 import net.dajman.rentalcar.ui.helpers.DragHelper;
-import net.dajman.rentalcar.ui.transition.ImageTransition;
+import net.dajman.rentalcar.ui.transition.fx.ImageTransition;
 import net.dajman.rentalcar.ui.utils.Images;
 
 public class Alert {

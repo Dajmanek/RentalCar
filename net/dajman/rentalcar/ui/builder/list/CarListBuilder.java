@@ -18,7 +18,7 @@ import net.dajman.rentalcar.basic.Car;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.utils.Colors;
 import net.dajman.rentalcar.ui.controller.controllers.ClientController;
-import net.dajman.rentalcar.ui.transition.BackgroundColorTransition;
+import net.dajman.rentalcar.ui.transition.fx.BackgroundColorTransition;
 import net.dajman.rentalcar.ui.utils.Images;
 import net.dajman.rentalcar.utils.TimeUtil;
 
