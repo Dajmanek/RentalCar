@@ -6,7 +6,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import net.dajman.rentalcar.ui.transition.swing.FadeTransition;
 import net.dajman.rentalcar.ui.transition.swing.SizeAndLocTransition;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.BorderFactory;
 import java.awt.*;
 
 public class PrepareFullScreenBox {

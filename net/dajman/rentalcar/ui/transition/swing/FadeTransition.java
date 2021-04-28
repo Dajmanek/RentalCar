@@ -3,7 +3,8 @@ package net.dajman.rentalcar.ui.transition.swing;
 import javafx.animation.Transition;
 import javafx.util.Duration;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+
 
 public class FadeTransition extends Transition {
 

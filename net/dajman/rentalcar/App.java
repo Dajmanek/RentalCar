@@ -3,7 +3,6 @@ package net.dajman.rentalcar;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCombination;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.dajman.rentalcar.basic.Car;

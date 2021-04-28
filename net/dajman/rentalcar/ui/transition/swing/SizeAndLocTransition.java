@@ -2,7 +2,7 @@ package net.dajman.rentalcar.ui.transition.swing;
 
 import javafx.animation.Transition;
 import javafx.util.Duration;
-import javax.swing.*;
+import javax.swing.JComponent;
 
 public class SizeAndLocTransition extends Transition {
 

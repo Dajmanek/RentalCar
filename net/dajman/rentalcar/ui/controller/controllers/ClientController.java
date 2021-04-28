@@ -70,7 +70,6 @@ public class ClientController extends Controller {
     @Override
     public void initialize(Object... objects) {
         this.client = (Client) objects[0];
-
         this.firstName.setText(this.client.getFirstName());
         this.lastName.setText(this.client.getLastName());
         this.phoneNumber.setText(this.client.getPhoneNumber());
@@ -83,8 +82,7 @@ public class ClientController extends Controller {
             this.address2.setText("ul. " + this.client.getStreet() + " " + this.client.getBuildingNumber() + (this.client.getFlatNumber() == -1 ? "" : "/" + this.client.getFlatNumber()));
             this.address2.setPrefHeight(20);
         }
-        this.numberOfRentedCars.setText(Integer.toString(this.client.getRentedCars().size()));
-        this.toPay.setText(String.format("%.2f", this.client.toPay()));
+        this.refreshData();
         this.onClickSearch(null);
     }
 
@@ -162,8 +160,7 @@ public class ClientController extends Controller {
         this.client.removeRentedCar(car);
         car.setRentalDate(0);
         car.setClient(null);
-        this.numberOfRentedCars.setText(Integer.toString(this.client.getRentedCars().size()));
-        this.toPay.setText(String.format("%.2f", this.client.toPay()));
+        this.refreshData();
         this.onClickSearch(null);
     }
 
@@ -174,14 +171,18 @@ public class ClientController extends Controller {
         car.setClient(this.client);
         car.setRentalDate(System.currentTimeMillis() - 1L);
         this.client.addRentedCar(car);
-        this.numberOfRentedCars.setText(Integer.toString(this.client.getRentedCars().size()));
-        this.toPay.setText(String.format("%.2f", this.client.toPay()));
+        this.refreshData();
         this.onClickSearch(null);
     }
 
     public void onTabChange(final int oldIndex, final int newIndex){
         this.searchField.setText("");
         this.onClickSearch(null);
+    }
+
+    private void refreshData(){
+        this.numberOfRentedCars.setText(Integer.toString(this.client.getRentedCars().size()));
+        this.toPay.setText(String.format("%.2f", this.client.toPay()) + " zł");
     }
 
     private void showLoadingGif(){

@@ -1,13 +1,7 @@
 package net.dajman.rentalcar.ui.loader;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import net.dajman.rentalcar.App;
 import net.dajman.rentalcar.ui.builder.shadow.ShadowBoxBuilder;

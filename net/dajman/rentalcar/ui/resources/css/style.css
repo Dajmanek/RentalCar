@@ -101,6 +101,11 @@ TextField:focused{
     -fx-background-color: white;
 }
 
+.incorrectField{
+    -fx-border-color: #e29393;
+    -fx-background-color: rgba(246, 174, 166, 0.2);
+}
+
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{

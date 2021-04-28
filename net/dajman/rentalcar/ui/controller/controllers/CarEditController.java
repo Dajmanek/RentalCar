@@ -8,20 +8,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import net.dajman.rentalcar.App;
-import net.dajman.rentalcar.basic.Car;
-import net.dajman.rentalcar.ui.NodeType;
-
-import net.dajman.rentalcar.ui.alert.Alert;
-import net.dajman.rentalcar.ui.controller.Controller;
-import net.dajman.rentalcar.ui.utils.Images;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+
+import net.dajman.rentalcar.App;
+import net.dajman.rentalcar.basic.Car;
+import net.dajman.rentalcar.ui.NodeType;
+import net.dajman.rentalcar.ui.alert.Alert;
+import net.dajman.rentalcar.ui.controller.Controller;
+import net.dajman.rentalcar.ui.utils.Images;
+import net.dajman.rentalcar.ui.utils.TextFields;
 
 
 public class CarEditController extends Controller {
@@ -47,7 +47,6 @@ public class CarEditController extends Controller {
         return NodeType.CAR_EDIT;
     }
 
-
     @Override
     protected void firstInitialize() {
         final ReadOnlyDoubleWrapper sizeProperty = new ReadOnlyDoubleWrapper();
@@ -57,10 +56,16 @@ public class CarEditController extends Controller {
         gridPane.heightProperty().addListener((obs, oldValue, newValue) ->  sizeProperty.set(Math.min(newValue.doubleValue() * 0.7, gridPane.widthProperty().doubleValue())));
         this.imageView.fitWidthProperty().bind(sizeProperty);
         this.imageView.fitHeightProperty().bind(sizeProperty);
+
+        this.brandField.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.brandField));
+        this.modelField.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.modelField));
+        this.priceField.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.priceField));
     }
 
     @Override
     public void initialize(final Object... objects) {
+        TextFields.setIncorrect(false, this.brandField, this.modelField, this.priceField);
+
         this.imageBytes = null;
         if (objects.length != 1){
             this.car = null;
@@ -76,9 +81,6 @@ public class CarEditController extends Controller {
         this.priceField.setText(car.getPrice() + "");
         this.imageView.setImage(car.getImage() != null ? car.getImage() : Images.imageEmpty);
     }
-
-
-
 
     public void onClickChooseFile(ActionEvent event) {
         final FileChooser fileChooser = new FileChooser();
@@ -106,6 +108,9 @@ public class CarEditController extends Controller {
     }
 
     public void onClickSave(ActionEvent event) {
+        if (TextFields.checkIfBlank(this.priceField, this.brandField, this.modelField)){
+            return;
+        }
         final float price;
         try{
              price = Float.parseFloat(this.priceField.getText());
@@ -119,8 +124,7 @@ public class CarEditController extends Controller {
             return;
         }
         boolean newCar = this.car == null;
-        if (newCar){
-            newCar = true;
+        if (newCar) {
             this.car = new Car();
             App.getInstance().getCarStorage().add(this.car);
         }
@@ -135,4 +139,5 @@ public class CarEditController extends Controller {
     public void onClickBack(ActionEvent event) {
         App.getInstance().openBack();
     }
+
 }

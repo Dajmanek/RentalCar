@@ -9,6 +9,7 @@ import net.dajman.rentalcar.basic.Client;
 import net.dajman.rentalcar.ui.NodeType;
 import net.dajman.rentalcar.ui.alert.Alert;
 import net.dajman.rentalcar.ui.controller.Controller;
+import net.dajman.rentalcar.ui.utils.TextFields;
 
 import java.util.Optional;
 
@@ -64,10 +65,18 @@ public class ClientEditController extends Controller {
                 this.postCode.positionCaret(this.postCode.getText().length());
             });
         });
+
+        this.firstName.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.firstName));
+        this.lastName.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.lastName));
+        this.phoneNumber.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.phoneNumber));
+        this.postCode.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.postCode));
+        this.city.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.city));
+        this.buildingNumber.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.buildingNumber));
     }
 
     @Override
     public void initialize(Object... objects) {
+        TextFields.setIncorrect(false, this.firstName, this.lastName, this.phoneNumber, this.postCode, this.city, this.buildingNumber);
         if (objects.length != 1){
             this.client = null;
             this.firstName.setText("");
@@ -98,45 +107,30 @@ public class ClientEditController extends Controller {
 
     @FXML
     public void onClickSave(ActionEvent event){
-        final String firstName = this.firstName.getText();
-        if (!this.emptyValidate(firstName, "Imię")){
-            return;
-        }
-        final String lastName = this.lastName.getText();
-        if (!this.emptyValidate(lastName, "Nazwisko")){
+        if (TextFields.checkIfBlank(this.firstName, this.lastName, this.phoneNumber, this.postCode, this.city, this.buildingNumber)){
             return;
         }
         final String phoneNumber = this.phoneNumber.getText();
-        if (!this.emptyValidate(phoneNumber, "Nr telefonu")){
+        if (!phoneNumber.matches("[0-9]+")){
+            new Alert("Pole \"Nr telefonu\" zawiera niedozwolone znaki.").show();
             return;
         }
-        if (!phoneNumber.matches("[0-9]+")){
-            new Alert("Pole \"Nr telefonu\" może składać się tylko z liczb.");
+        if (phoneNumber.length() != 9){
+            new Alert("Nr telefonu powinien skladac sie z 9 cyfr.").show();
             return;
         }
         final String postCode = this.postCode.getText();
-        if (!this.emptyValidate(postCode, "Kod pocztowy")){
-            return;
-        }
         if (postCode.length() != 6 || postCode.charAt(2) != '-'){
-            new Alert("Pole \"Kod pocztowy\" zostało błędnie wypełnione.");
-            return;
-        }
-        final String city = this.city.getText();
-        if (!this.emptyValidate(city, "Miasto")){
+            new Alert("Pole \"Kod pocztowy\" zostało błędnie wypełnione.").show();
             return;
         }
         final String streetText = this.street.getText();
         final String street = streetText.isBlank() ? null : streetText;
-        final String buildingNumberText = this.buildingNumber.getText();
-        if (!this.emptyValidate(buildingNumberText, "Nr budynku")){
-            return;
-        }
         final int buildingNumber;
         try{
-            buildingNumber = Integer.parseInt(buildingNumberText);
+            buildingNumber = Integer.parseInt(this.buildingNumber.getText());
         }catch (NumberFormatException e){
-            new Alert("Pole \"Nr budynku\" musi być liczbą.");
+            new Alert("Pole \"Nr budynku\" zawiera niedozwolone znaki.").show();
             e.printStackTrace();
             return;
         }
@@ -145,7 +139,7 @@ public class ClientEditController extends Controller {
             try{
                 flatNumber = Integer.parseInt(this.flatNumber.getText());
             }catch (NumberFormatException e){
-                new Alert("Pole \"Nr mieszkania\" musi być liczbą.");
+                new Alert("Pole \"Nr mieszkania\" zawiera niedozwolone znaki.").show();
                 e.printStackTrace();
                 return;
             }
@@ -155,23 +149,15 @@ public class ClientEditController extends Controller {
             this.client = new Client();
             App.getInstance().getClientStorage().add(this.client);
         }
-        this.client.setFirstName(firstName);
-        this.client.setLastName(lastName);
+        this.client.setFirstName(firstName.getText());
+        this.client.setLastName(lastName.getText());
         this.client.setPhoneNumber(phoneNumber);
         this.client.setPostCode(postCode);
-        this.client.setCity(city);
+        this.client.setCity(city.getText());
         this.client.setStreet(street);
         this.client.setBuildingNumber(buildingNumber);
         this.client.setFlatNumber(flatNumber);
         this.onClickBack(null);
         if (newClient) App.getInstance().openGui(NodeType.CLIENT, this.client);
-    }
-
-    private boolean emptyValidate(final String text, final String fieldName){
-        if (!text.isBlank()){
-            return true;
-        }
-        new Alert("Pole \"" + fieldName + "\" nie może być puste.");
-        return false;
     }
 }

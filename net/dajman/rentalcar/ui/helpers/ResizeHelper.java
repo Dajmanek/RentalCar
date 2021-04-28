@@ -1,6 +1,5 @@
 package net.dajman.rentalcar.ui.helpers;
 
-import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
