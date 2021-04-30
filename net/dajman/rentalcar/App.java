@@ -18,40 +18,33 @@ import net.dajman.rentalcar.ui.loader.NodeLoader;
 import net.dajman.rentalcar.ui.controller.IController;
 import net.dajman.rentalcar.ui.utils.Images;
 
-
 import java.util.*;
 import java.util.List;
 
-public class App extends Application {
+public class App extends Application{
 
     public static final transient int SHADOW_RADIUS = 15;
     public static final transient String STYLESHEET = App.class.getResource("ui/resources/css/style.css").toExternalForm();
 
-    private static App application;
+    private static transient App instance;
+    private transient Stage stage;
+    private transient NodeType openedGui;
+    private transient MainNodeLoader mainNodeLoader;
+    private transient DragHelper dragHelper;
+    private transient ResizeHelper resizeHelper;
+    private transient List<HistoryElement> history;
+    private transient Map<NodeType, NodeLoader> nodeLoaders;
+    private transient Map<NodeType, IController> controllers;
+    private transient FileDataManager fileDataManager;
+    private transient EntryStorage<Car> carStorage;
+    private transient EntryStorage<Client> clientStorage;
 
-    private FileDataManager fileDataManager;
-    private EntryStorage<Car> carStorage;
-    private EntryStorage<Client> clientStorage;
+    private transient double widthBeforeFullScreen;
+    private transient double heightBeforeFullScreen;
 
-    private Stage stage;
-    private NodeType openedGui;
-    private MainNodeLoader mainNodeLoader;
-    private DragHelper dragHelper;
-    private ResizeHelper resizeHelper;
-    private List<HistoryElement> history;
-    private Map<NodeType, NodeLoader> nodeLoaders;
-    private Map<NodeType, IController> controllers;
-
-    private double widthBeforeFullScreen;
-    private double heightBeforeFullScreen;
-
-
-    public static void main(final String... args){
-        launch(args);
-    }
 
     public static App getInstance(){
-        return App.application;
+        return App.instance;
     }
 
     public FileDataManager getFileDataManager() {
@@ -90,9 +83,13 @@ public class App extends Application {
         this.controllers.put(controller.getType(), controller);
     }
 
+    public static void main(final String... args){
+        launch(args);
+    }
+
     @Override
     public void start(final Stage stage) {
-        App.application = this;
+        App.instance = this;
         this.carStorage = new EntryStorage<>();
         this.clientStorage = new EntryStorage<>();
         this.controllers = new HashMap<>();
@@ -177,6 +174,5 @@ public class App extends Application {
         this.getController(nodeType).init(objects);
         return true;
     }
-
 
 }

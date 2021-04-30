@@ -7,14 +7,13 @@ import net.dajman.rentalcar.exceptions.DeserializationException;
 import java.io.ByteArrayInputStream;
 
 
-public class Car extends Entry<Car>{
+public class Car extends Entry<Car> {
 
     private float price;
     private String brand;
     private String model;
     private Client client;
     private long rentalDate;
-
     private byte[] imageBytes;
     private transient Image image;
 

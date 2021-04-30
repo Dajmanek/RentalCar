@@ -15,7 +15,7 @@ public class Client extends Entry<Client>{
     private String street;
     private int buildingNumber;
     private int flatNumber;
-    private List<Car> rentedCars;
+    private final List<Car> rentedCars;
 
     public Client(){
         this.rentedCars = new ArrayList<>();
