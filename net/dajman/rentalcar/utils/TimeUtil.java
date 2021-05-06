@@ -30,32 +30,22 @@ public class TimeUtil {
         StringBuilder sb = new StringBuilder();
         if (days > 0L) {
             sb.append(days);
-            if (days == 1)sb.append(" dzien ");
-            else sb.append(" dni ");
+            sb.append(days == 1L ? " dzien " : " dni ");
         }
         if (hours > 0L) {
             sb.append(hours);
-            long i = hours % 10L;
-            if (hours == 1L) sb.append(" godzina ");
-            else if (hours > 10 && hours < 15) sb.append(" godzin ");
-            else if (i < 5L) sb.append(" godziny ");
-            else sb.append(" godzin ");
+            final long i = hours % 10L;
+            sb.append(hours == 1L ? " godzina " : i <= 1 || i >= 5 || (hours >= 12 && hours <= 14) ? " godzin " : " godziny ");
         }
         if (minutes > 0L) {
             sb.append(minutes);
-            long i = minutes % 10L;
-            if (minutes == 1L) sb.append(" minuta ");
-            else if (minutes > 10 && minutes < 15) sb.append(" minut ");
-            else if (i < 5L) sb.append(" minuty ");
-            else sb.append(" minut ");
+            final long i = minutes % 10L;
+            sb.append(minutes == 1L ? " minuta " : i <= 1 ||  i >= 5 || (minutes >= 12 && minutes <= 14) ? " minut " : " minuty ");
         }
         if (seconds > 0L) {
             sb.append(seconds);
-            long i = seconds % 10L;
-            if (seconds == 1L) sb.append(" sekunda ");
-            else if (seconds > 10 && seconds < 15) sb.append(" sekund ");
-            else if (i < 5L) sb.append(" sekundy ");
-            else sb.append(" sekund ");
+            final long i = seconds % 10L;
+            sb.append(seconds == 1L ? " sekunda " : i <= 1 || i >= 5 || (seconds >= 12 && seconds <= 14)? " sekund " : " sekundy ");
         }
         return sb.toString();
     }
@@ -74,20 +64,16 @@ public class TimeUtil {
 
         StringBuilder sb = new StringBuilder();
         if (days > 0L) {
-            sb.append(days);
-            sb.append("d ");
+            sb.append(days).append("d ");
         }
         if (hours > 0L) {
-            sb.append(hours);
-            sb.append("h ");
+            sb.append(hours).append("h ");
         }
         if (minutes > 0L) {
-            sb.append(minutes);
-            sb.append("m ");
+            sb.append(minutes).append("m ");
         }
         if (seconds > 0L) {
-            sb.append(seconds);
-            sb.append("s ");
+            sb.append(seconds).append("s ");
         }
         return sb.toString();
     }

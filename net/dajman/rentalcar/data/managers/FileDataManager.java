@@ -61,6 +61,7 @@ public class FileDataManager implements DataManager {
                 i++;
                 progress.set(0.05 + (double) i / clientsAmount * 0.4) ;
             }
+            progress.set(0.45);
             // WRITING CARS
             for(Car car : cars){
                 final byte[] carBytes = car.serialize().getBytes();
