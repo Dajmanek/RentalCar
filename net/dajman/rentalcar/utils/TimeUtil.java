@@ -8,7 +8,11 @@ public class TimeUtil {
 
 
     public static String getDate(long time){
-        return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(time).getTime());
+        return new SimpleDateFormat("dd.MM.yyyy").format(new Date(time).getTime());
+    }
+
+    public static String getHour(final long time){
+        return new SimpleDateFormat("HH:mm:ss").format(new Date(time).getTime());
     }
 
     public static String getDurationBreakdown(long millis) {

@@ -161,7 +161,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             borderPane.setCursor(Cursor.HAND);
             borderPane.setOnMouseEntered(e -> new BackgroundColorTransition(Colors.LIST_ROW_BACKGROUND, Colors.LIST_ROW_BACKGROUND_HOVER, Duration.millis(200), borderPane).playFromStart());
             borderPane.setOnMouseExited(e -> new BackgroundColorTransition(Colors.LIST_ROW_BACKGROUND_HOVER, Colors.LIST_ROW_BACKGROUND, Duration.millis(200), borderPane).playFromStart());
-            borderPane.setOnMouseClicked(mouseEvent -> App.getInstance().openGui(NodeType.CAR, car, car.getClient()));
+            borderPane.setOnMouseClicked(mouseEvent -> App.getInstance().openGui(NodeType.CAR, car));
             // LEFT
             final HBox hBox = new HBox();
             hBox.setMinWidth(280);
@@ -243,7 +243,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             borderPane.setCursor(Cursor.HAND);
             borderPane.setOnMouseEntered(e -> new BackgroundColorTransition(Colors.LIST_ROW_BACKGROUND, Colors.LIST_ROW_BACKGROUND_HOVER, Duration.millis(200), borderPane).playFromStart());
             borderPane.setOnMouseExited(e -> new BackgroundColorTransition(Colors.LIST_ROW_BACKGROUND_HOVER, Colors.LIST_ROW_BACKGROUND, Duration.millis(200), borderPane).playFromStart());
-            borderPane.setOnMouseClicked(mouseEvent -> App.getInstance().openGui(NodeType.CAR, car, car.getClient()));
+            borderPane.setOnMouseClicked(mouseEvent -> App.getInstance().openGui(NodeType.CAR, car));
             // LEFT
             final HBox hBox = new HBox();
             hBox.setMinWidth(280);

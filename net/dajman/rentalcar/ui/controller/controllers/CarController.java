@@ -18,7 +18,6 @@ import net.dajman.rentalcar.utils.TimeUtil;
 public class CarController extends Controller {
 
     private Car car;
-    private Client openOnBack;
 
     @FXML
     private Label brandLabel;
@@ -33,6 +32,8 @@ public class CarController extends Controller {
     @FXML
     private Label dateLabel;
     @FXML
+    public Label durationLabel;
+    @FXML
     private ImageView imageView;
 
 
@@ -44,7 +45,6 @@ public class CarController extends Controller {
     public NodeType getType() {
         return NodeType.CAR;
     }
-
 
     @Override
     protected void firstInitialize() {
@@ -59,9 +59,6 @@ public class CarController extends Controller {
 
     @Override
     public void initialize(final Object... objects) {
-        if (objects.length == 2){
-            this.openOnBack = (Client) objects[1];
-        }
         this.car = (Car)objects[0];
         if (this.car == null){
             this.onClickBack(null);
@@ -75,14 +72,15 @@ public class CarController extends Controller {
             final Client client = car.getClient();
             this.statusLabel.setText("wypożyczony");
             this.clientLabel.setText(client.getFirstName() + " " + client.getLastName());
-            this.dateLabel.setText(TimeUtil.getDate(car.getRentalDate()) + " (Upłynęło: " + TimeUtil.getDurationBreakdown(System.currentTimeMillis() - car.getRentalDate()) + " )");
+            this.dateLabel.setText(TimeUtil.getDate(car.getRentalDate()) + ", godz " + TimeUtil.getHour(car.getRentalDate()));
+            this.durationLabel.setText(TimeUtil.getDurationBreakdown(System.currentTimeMillis() - car.getRentalDate()));
             return;
         }
         this.statusLabel.setText("dostępny");
         this.clientLabel.setText(" - ");
         this.dateLabel.setText(" - ");
+        this.durationLabel.setText(" - ");
     }
-
 
     @FXML
     public void onClickBack(final ActionEvent event){
@@ -94,7 +92,6 @@ public class CarController extends Controller {
         App.getInstance().openGui(NodeType.CAR_EDIT, this.car);
     }
 
-
     @FXML
     public void onClickDelete(final ActionEvent event){
         if (this.car != null){
@@ -105,9 +102,4 @@ public class CarController extends Controller {
         }
         this.onClickBack(null);
     }
-
-
-
-
-
 }

@@ -79,12 +79,13 @@ public class ClientEditController extends Controller {
         this.phoneNumber.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.phoneNumber));
         this.postCode.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.postCode));
         this.city.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.city));
+        this.street.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.street));
         this.buildingNumber.focusedProperty().addListener((obs) -> TextFields.setIncorrect(false, this.buildingNumber));
     }
 
     @Override
     public void initialize(Object... objects) {
-        TextFields.setIncorrect(false, this.firstName, this.lastName, this.phoneNumber, this.postCode, this.city, this.buildingNumber);
+        TextFields.setIncorrect(false, this.firstName, this.lastName, this.phoneNumber, this.postCode, this.city, this.street, this.buildingNumber);
         if (objects.length != 1){
             this.client = null;
             this.firstName.setText("");
@@ -118,6 +119,10 @@ public class ClientEditController extends Controller {
         if (TextFields.checkIfBlank(this.firstName, this.lastName, this.phoneNumber, this.postCode, this.city, this.buildingNumber)){
             return;
         }
+        if (!TextFields.checkIfMatches(TextFields.ONLY_LETTERS_PATTERN, this.firstName, this.lastName, this.city)){
+            new Alert("Wykryto niedozwolone znaki, wypełnij pola poprawnie.").show();
+            return;
+        }
         final String phoneNumber = this.phoneNumber.getText();
         if (!phoneNumber.matches("[0-9]+")){
             new Alert("Pole \"Nr telefonu\" zawiera niedozwolone znaki.").show();
@@ -134,6 +139,10 @@ public class ClientEditController extends Controller {
         }
         final String streetText = this.street.getText();
         final String street = streetText.isBlank() ? null : streetText;
+        if (street != null && !TextFields.checkIfMatches(TextFields.SPACE_AND_NUMBERS_AND_LETTERS_PATTERN, this.street)){
+            new Alert("Pole \"Ulica\" zawiera niedozwolone znaki.").show();
+            return;
+        }
         final int buildingNumber;
         try{
             buildingNumber = Integer.parseInt(this.buildingNumber.getText());

@@ -111,15 +111,25 @@ public class CarEditController extends Controller {
         if (TextFields.checkIfBlank(this.priceField, this.brandField, this.modelField)){
             return;
         }
+        if (!TextFields.checkIfMatches(TextFields.NUMBERS_AND_LETTERS_PATTERN, this.brandField)){
+            new Alert("Pole \"Marka\" zawiera niedozwolone znaki.").show();
+            return;
+        }
+        if (!TextFields.checkIfMatches(TextFields.SPACE_AND_NUMBERS_AND_LETTERS_PATTERN, this.modelField)){
+            new Alert("Pole \"Model\" zawiera niedozwolone znaki.").show();
+            return;
+        }
         final float price;
         try{
              price = Float.parseFloat(this.priceField.getText());
             if (price < 0.01){
+                TextFields.setIncorrect(true, this.priceField);
                 new Alert("Cena nie może być mniejsza niż 0.01.").show();
                 return;
             }
         }catch (NumberFormatException e){
             e.printStackTrace();
+            TextFields.setIncorrect(true, this.priceField);
             new Alert("Wpisana wartość cena jest niepoprawna.").show();
             return;
         }

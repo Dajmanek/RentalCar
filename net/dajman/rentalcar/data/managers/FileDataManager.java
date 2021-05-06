@@ -127,7 +127,6 @@ public class FileDataManager implements DataManager {
                 e.printStackTrace();
                 return false;
             }
-            System.out.println(clients.size());
             App.getInstance().getClientStorage().addAll(clients);
             progress.set(0.45);
             // LOAD CARS

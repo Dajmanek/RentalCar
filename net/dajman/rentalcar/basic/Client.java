@@ -42,6 +42,7 @@ public class Client extends Entry<Client>{
         this.postCode = splited[4];
         this.city = splited[5];
         this.street = splited[6];
+        if (this.street.isBlank()) this.street = null;
         this.rentedCars = new ArrayList<>();
     }
 
@@ -160,7 +161,7 @@ public class Client extends Entry<Client>{
         sb.append(this.phoneNumber).append(',');
         sb.append(this.postCode).append(',');
         sb.append(this.city).append(',');
-        sb.append(this.street).append(',');
+        sb.append(Optional.ofNullable(this.street).orElse("")).append(',');
         sb.append(this.buildingNumber).append(',');
         sb.append(this.flatNumber);
         return sb.toString();

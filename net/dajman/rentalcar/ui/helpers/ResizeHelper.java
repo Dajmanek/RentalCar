@@ -4,7 +4,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import net.dajman.rentalcar.App;
 
 public class ResizeHelper {
 
@@ -17,9 +16,8 @@ public class ResizeHelper {
     private transient Side side;
 
     public ResizeHelper(final Stage stage){
-        this(stage, 8, App.SHADOW_RADIUS);
+        this(stage, 8, 0);
     }
-
 
     public ResizeHelper(final Stage stage, final int border, final int shadowRadius){
         this.side = Side.NONE;

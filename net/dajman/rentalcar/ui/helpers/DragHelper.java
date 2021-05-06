@@ -9,15 +9,12 @@ import net.dajman.rentalcar.ui.PrepareFullScreenBox;
 public class DragHelper {
 
     private final Stage stage;
-    private final boolean topFullScreen;
-    private PrepareFullScreenBox prepareFullScreenBox;
     private final double shadowRadius;
-    private double width;
-    private double height;
-    private double x;
-    private double y;
+    private final boolean topFullScreen;
+    private final PrepareFullScreenBox prepareFullScreenBox;
 
-    private boolean pressed = false;
+    private transient double x;
+    private transient double y;
 
 
     public DragHelper(final Stage stage, final double shadowRadius, final Node... nodes){
@@ -28,9 +25,7 @@ public class DragHelper {
         this.stage = stage;
         this.shadowRadius = shadowRadius;
         this.topFullScreen = topFullScreen;
-        if (topFullScreen){
-            this.prepareFullScreenBox = new PrepareFullScreenBox(stage, shadowRadius);
-        }
+        this.prepareFullScreenBox = topFullScreen ? new PrepareFullScreenBox(stage, shadowRadius) : null;
         for (Node node : nodes) {
             this.register(node);
         }
@@ -68,8 +63,6 @@ public class DragHelper {
         if (stageY >= screen.getBounds().getMinY() && stageY <= screen.getBounds().getMinY() + 4){
             if (!stage.isFullScreen()){
                 stage.setX(screen.getBounds().getMinX());
-                /*this.width = this.stage.getWidth();
-                this.height = this.stage.getHeight();*/
                 stage.setFullScreen(true);
             }
             return;
@@ -92,10 +85,6 @@ public class DragHelper {
                     return;
                 }
                 this.stage.setFullScreen(false);
-                /*if (this.stage.getWidth() != this.width || this.stage.getHeight() != this.height){
-                    this.stage.setWidth(this.width);
-                    this.stage.setHeight(this.height);
-                }*/
                 this.x = this.x / (screen.getBounds().getWidth() / this.stage.getWidth());
             }
         }
@@ -116,13 +105,6 @@ public class DragHelper {
         }
     }
 
-    private boolean containsXOnScreens(final double x){
-        for (Screen screen : Screen.getScreens())
-            if (screen.getBounds().getMinX() <= x && screen.getBounds().getMaxX() >= x)
-                return true;
-        return false;
-    }
-
     private boolean containsYOnScreens(final double y){
         for (Screen screen : Screen.getScreens())
             if (screen.getBounds().getMinY() <= y && screen.getBounds().getMaxY() >= y)
@@ -130,19 +112,8 @@ public class DragHelper {
         return false;
     }
 
-    private boolean containsOnScreens(final double x, final double y){
-        for (Screen screen : Screen.getScreens())
-            if (screen.getBounds().contains(x ,y))
-                return true;
-        return false;
-    }
-
     private Screen getScreen(final double x, final double y){
         return Screen.getScreens().stream().filter(screen -> screen.getBounds().contains(x, y)).findFirst().orElse(null);
     }
-
-
-
-
 
 }
