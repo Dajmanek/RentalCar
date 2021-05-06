@@ -4,6 +4,7 @@ import net.dajman.rentalcar.basic.Entry;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class EntryStorage<T extends Entry<T>>  extends Storage<T> {
@@ -42,13 +43,6 @@ public class EntryStorage<T extends Entry<T>>  extends Storage<T> {
         if (entireText == null || entireText.isBlank()){
             return this.getAll();
         }
-        final Set<T> set = new HashSet<>();
-        final String[] splited = entireText.toLowerCase().split(" ");
-        for(String text: splited){
-            if (text.isBlank())
-                continue;
-            set.addAll(this.getAll().parallelStream().filter(entry -> entry.isSimilar(text)).collect(Collectors.toSet()));
-        }
-        return set;
+        return this.getAll().parallelStream().filter(entry -> entry.isSimilar(entireText.toLowerCase().split(" "))).collect(Collectors.toSet());
     }
 }

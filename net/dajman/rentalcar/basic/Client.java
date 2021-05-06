@@ -18,7 +18,7 @@ public class Client extends Entry<Client>{
     private final List<Car> rentedCars;
 
     public Client(){
-        this.rentedCars = new ArrayList<>();
+        this.rentedCars = null;
     }
 
     public Client(final String text) throws DeserializationException{
@@ -26,7 +26,7 @@ public class Client extends Entry<Client>{
             throw new DeserializationException( "Text is empty");
         }
         final String[] splited = text.split(",");
-        if (splited.length < 10) {
+        if (splited.length < 9) {
             throw new DeserializationException("Text is incomplete");
         }
         try{
@@ -60,6 +60,7 @@ public class Client extends Entry<Client>{
         this.buildingNumber = buildingNumber;
         this.flatNumber = flatNumber;
         this.rentedCars = new ArrayList<>();
+        App.getInstance().getClientStorage().add(this);
     }
 
     public String getFirstName() {
@@ -157,7 +158,6 @@ public class Client extends Entry<Client>{
         sb.append(this.firstName).append(',');
         sb.append(this.lastName).append(',');
         sb.append(this.phoneNumber).append(',');
-        sb.append(this.phoneNumber).append(',');
         sb.append(this.postCode).append(',');
         sb.append(this.city).append(',');
         sb.append(this.street).append(',');
@@ -179,6 +179,5 @@ public class Client extends Entry<Client>{
     public static Client get(final int id){
         return App.getInstance().getClientStorage().get(id);
     }
-
 
 }

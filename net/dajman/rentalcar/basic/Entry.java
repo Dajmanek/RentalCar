@@ -24,4 +24,12 @@ public abstract class Entry<T extends Entry<T>> {
 
     public abstract boolean isSimilar(final String text);
 
+    public boolean isSimilar(final String... texts){
+        boolean result = true;
+        for(String text : texts){
+            result &= this.isSimilar(text);
+        }
+        return result;
+    }
+
 }

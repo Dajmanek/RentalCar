@@ -148,7 +148,7 @@ public class MainController extends Controller {
             return;
         }
         if (!file.getName().contains(".")){
-            file = new File(file.getName() + FileDataManager.FILE_EXTENSION);
+            file = new File(file.getParent(), file.getName() + FileDataManager.FILE_EXTENSION);
         }
         else if (!file.getName().endsWith(FileDataManager.FILE_EXTENSION)){
             new Alert("Nieprawidłowy format pliku").show();

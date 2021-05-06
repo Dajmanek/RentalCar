@@ -126,14 +126,13 @@ public class ClientController extends Controller {
 
         final int tabIndex = this.tabs.getSelectionModel().getSelectedIndex();
         final ScrollPane scrollPane = tabIndex == 0 ? this.rentedCars : this.availableCars;
-        final String searchText = this.searchField.getText();
-
-        this.searchTask = new Task<Node>() {
+        final String[] splitedSearchText = this.searchField.getText().split(" ");
+        this.searchTask = new Task<>() {
             @Override
-            protected Node call() throws Exception {
-                return switch (tabIndex){
-                    case 0 -> new CarListBuilder(CarListBuilder.ListType.CLIENT_RENTED, client.getRentedCars().parallelStream().filter(car -> car.isSimilar(searchText)).collect(Collectors.toSet())).build();
-                    default -> new CarListBuilder(CarListBuilder.ListType.CLIENT_AVAILABLE, App.getInstance().getCarStorage().getAll().parallelStream().filter(Car::isAvailable).filter(car -> car.isSimilar(searchText)).collect(Collectors.toSet())).build();
+            protected Node call() {
+                return switch (tabIndex) {
+                    case 0 -> new CarListBuilder(CarListBuilder.ListType.CLIENT_RENTED, client.getRentedCars().parallelStream().filter(car -> car.isSimilar(splitedSearchText)).collect(Collectors.toSet())).build();
+                    default -> new CarListBuilder(CarListBuilder.ListType.CLIENT_AVAILABLE, App.getInstance().getCarStorage().getAll().parallelStream().filter(Car::isAvailable).filter(car -> car.isSimilar(splitedSearchText)).collect(Collectors.toSet())).build();
                 };
             }
         };

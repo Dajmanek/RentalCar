@@ -18,6 +18,7 @@ public class Car extends Entry<Car> {
     private transient Image image;
 
     public Car(){
+        super(App.getInstance().getCarStorage());
     }
 
     public Car(final String text) throws DeserializationException {
@@ -35,6 +36,7 @@ public class Car extends Entry<Car> {
             this.model = splited[3];
             final int clientId = Integer.parseInt(splited[4]);
             this.client = clientId == -1 ? null : Client.get(clientId);
+            if (this.client != null) this.client.addRentedCar(this);
             this.rentalDate = Long.parseLong(splited[5]);
             this.imageBytes = new byte[Integer.parseInt(splited[6])];
         }catch (NumberFormatException e){
@@ -43,10 +45,11 @@ public class Car extends Entry<Car> {
     }
 
     public Car(final float price, final String brand, final String model){
-        this.id = App.getInstance().getCarStorage().getNextId();
+        super(App.getInstance().getCarStorage());
         this.price = price;
         this.brand = brand;
         this.model = model;
+        App.getInstance().getCarStorage().add(this);
     }
 
     public float getPrice() {
@@ -120,6 +123,7 @@ public class Car extends Entry<Car> {
 
     public void setImageBytes(byte[] imageBytes) {
         this.imageBytes = imageBytes;
+        this.image = new Image(new ByteArrayInputStream(this.imageBytes));
     }
 
     @Override

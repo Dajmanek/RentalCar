@@ -35,7 +35,6 @@ public class ClientEditController extends Controller {
     private TextField buildingNumber;
     @FXML
     private TextField flatNumber;
-    int i = 0;
 
     public ClientEditController(){
         App.getInstance().addController(this);
@@ -63,6 +62,15 @@ public class ClientEditController extends Controller {
             Platform.runLater(() -> {
                 this.postCode.setText(finalText);
                 this.postCode.positionCaret(this.postCode.getText().length());
+            });
+        });
+        this.phoneNumber.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue.length() < 10){
+                return;
+            }
+            Platform.runLater(() -> {
+                this.phoneNumber.setText(newValue.substring(0, 9));
+                this.phoneNumber.positionCaret(this.phoneNumber.getText().length());
             });
         });
 
@@ -144,10 +152,11 @@ public class ClientEditController extends Controller {
                 return;
             }
         }
-        final boolean newClient = this.client == null;
-        if (newClient){
-            this.client = new Client();
-            App.getInstance().getClientStorage().add(this.client);
+        if (this.client == null){
+            this.client = new Client(firstName.getText(), lastName.getText(), phoneNumber, postCode, city.getText(), street, buildingNumber, flatNumber);
+            this.onClickBack(null);
+            App.getInstance().openGui(NodeType.CLIENT, this.client);
+            return;
         }
         this.client.setFirstName(firstName.getText());
         this.client.setLastName(lastName.getText());
@@ -158,6 +167,5 @@ public class ClientEditController extends Controller {
         this.client.setBuildingNumber(buildingNumber);
         this.client.setFlatNumber(flatNumber);
         this.onClickBack(null);
-        if (newClient) App.getInstance().openGui(NodeType.CLIENT, this.client);
     }
 }

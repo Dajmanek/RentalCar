@@ -123,17 +123,19 @@ public class CarEditController extends Controller {
             new Alert("Wpisana wartość cena jest niepoprawna.").show();
             return;
         }
-        boolean newCar = this.car == null;
-        if (newCar) {
-            this.car = new Car();
-            App.getInstance().getCarStorage().add(this.car);
+
+        if (this.car == null){
+            this.car = new Car(price, this.brandField.getText(), this.modelField.getText());
+            if (this.imageBytes != null) this.car.setImageBytes(this.imageBytes);
+            this.onClickBack(null);
+            App.getInstance().openGui(NodeType.CAR, this.car);
+            return;
         }
         this.car.setBrand(this.brandField.getText());
         this.car.setModel(this.modelField.getText());
         this.car.setPrice(price);
         if (this.imageBytes != null) this.car.setImageBytes(this.imageBytes);
         this.onClickBack(null);
-        if (newCar) App.getInstance().openGui(NodeType.CAR, this.car);
     }
 
     public void onClickBack(ActionEvent event) {

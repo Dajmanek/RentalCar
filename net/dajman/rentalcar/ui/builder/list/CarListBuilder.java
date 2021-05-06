@@ -84,6 +84,8 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             // IMAGE
             final BorderPane imageBorderPane = new BorderPane();
             imageBorderPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
+            imageBorderPane.setPrefWidth(180);
+            imageBorderPane.setMaxWidth(180);
             hBox.getChildren().add(imageBorderPane);
             final Image image = Optional.ofNullable(car.getImage()).orElse(Images.imageEmpty);
             final ImageView imageView = new ImageView(image);
@@ -92,7 +94,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             imageBorderPane.setCenter(imageView);
             // LEFT HBOX DATA
             final VBox vBox = new VBox();
-            vBox.setPrefWidth(420);
+            vBox.setPrefWidth(340);
             vBox.setPadding(new Insets(18, 0, 0, 0));
             hBox.getChildren().add(vBox);
             // LEFT BOX (Car.brand)
@@ -121,7 +123,7 @@ public class CarListBuilder extends EntryListBuilder<Car> {
             hBoxModel.getChildren().addAll(labelModel, labelModelValue);
             // PRICE
             final HBox hBoxPrice = new HBox();
-            hBoxPrice.setPadding(new Insets(29, 25, 0, 0));
+            hBoxPrice.setPadding(new Insets(29, 50, 0, 0));
             hBoxPrice.setSpacing(5);
             BorderPane.setAlignment(hBoxPrice, Pos.CENTER_RIGHT);
             borderPane.setRight(hBoxPrice);
