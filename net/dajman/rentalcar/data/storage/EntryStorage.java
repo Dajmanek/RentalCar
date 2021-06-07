@@ -2,6 +2,7 @@ package net.dajman.rentalcar.data.storage;
 
 import net.dajman.rentalcar.basic.Entry;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,6 +34,7 @@ public class EntryStorage<T extends Entry<T>>  extends Storage<T> {
         return super.addAll(objects);
     }
 
+    @Override
     public boolean add(final T entry){
         this.maxId = Math.max(this.maxId, entry.getId());
         return super.add(entry);

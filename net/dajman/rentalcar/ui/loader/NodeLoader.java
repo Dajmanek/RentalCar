@@ -10,7 +10,6 @@ public class NodeLoader {
 
     private Parent parent;
 
-
     public NodeLoader(final String styleFileName){
         final FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/resources/fxml/" + styleFileName + ".fxml"));
         try{
@@ -21,10 +20,8 @@ public class NodeLoader {
         }
     }
 
-
     public Parent getParent() {
         return parent;
     }
-
 
 }

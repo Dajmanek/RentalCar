@@ -32,7 +32,6 @@ public class MainNodeLoader extends NodeLoader{
         this.mainPane.add(nodeLoader.getParent(), 0, 1);
     }
 
-
     public void registerDrag(final DragHelper dragHelper){
         final GridPane topMenu = (GridPane) this.mainPane.getChildren().get(0);
         dragHelper.register(topMenu);
@@ -50,6 +49,5 @@ public class MainNodeLoader extends NodeLoader{
         scene.getStylesheets().add(App.STYLESHEET);
         return scene;
     }
-
 
 }

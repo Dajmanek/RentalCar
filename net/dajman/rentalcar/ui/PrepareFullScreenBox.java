@@ -11,8 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.BorderFactory;
 import java.awt.*;
+import java.util.Queue;
 
-public class PrepareFullScreenBox {
+public class PrepareFullScreenBox{
+
 
     private static final transient int shadowSize = 25;
 
